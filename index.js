@@ -192,7 +192,7 @@ ControllerBandcamp.prototype.search = function(query) {
 ControllerBandcamp.prototype.goto = function(data) {
     let views = ViewHelper.getViewsFromUri(data.uri);
     let trackView = views[1];
-    if (!trackView && trackView.name !== 'track') {
+    if (!trackView && trackView.name !== 'track' && trackView.name !== 'show') {
         return this.browseController.browseUri('bandcamp');
     }
     if (data.type === 'album' && trackView.albumUrl) {
@@ -200,6 +200,9 @@ ControllerBandcamp.prototype.goto = function(data) {
     }
     else if (data.type === 'artist' && trackView.artistUrl) {
         return this.browseController.browseUri('bandcamp/artist@artistUrl=' + trackView.artistUrl);
+    }
+    else if (trackView.name === 'show') {
+        return this.browseController.browseUri('bandcamp/shows@showUrl=' + trackView.showUrl);
     }
     else {
         return this.browseController.browseUri('bandcamp');
