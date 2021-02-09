@@ -204,6 +204,9 @@ ControllerBandcamp.prototype.goto = function(data) {
     else if (trackView.name === 'show') {
         return this.browseController.browseUri('bandcamp/shows@showUrl=' + trackView.showUrl);
     }
+    else if (trackView.name === 'article') {
+        return this.browseController.browseUri('bandcamp/articles@articleUrl=' + trackView.articleUrl);
+    }
     else {
         return this.browseController.browseUri('bandcamp');
     }
@@ -211,5 +214,10 @@ ControllerBandcamp.prototype.goto = function(data) {
 
 ControllerBandcamp.prototype.saveDefaultDiscoverParams = function(data) {
     this.config.set('defaultDiscoverParams', JSON.stringify(data));
+    bandcamp.toast('success', bandcamp.getI18n('BANDCAMP_SETTINGS_SAVED'));
+}
+
+ControllerBandcamp.prototype.saveDefaultArticleCategory = function(data) {
+    this.config.set('defaultArticleCategory', JSON.stringify(data));
     bandcamp.toast('success', bandcamp.getI18n('BANDCAMP_SETTINGS_SAVED'));
 }
