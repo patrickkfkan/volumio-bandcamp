@@ -58,6 +58,9 @@ As the name implies, the purpose of this plugin is to allow you to discover musi
 
 ## Changelog
 
+0.1.0b-20210319
+- Add release date to album header
+
 0.1.0b-20210216
 - Add Browse by Tags
 
