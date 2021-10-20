@@ -4,12 +4,17 @@ Volumio plugin for discovering Bandcamp music.
 
 *This plugin is not affiliated with Bandcamp whatsoever.*
 
-## Getting Started
+## Installation
 
-To install the Bandcamp Discover plugin, first make sure you have [enabled SSH access](https://volumio.github.io/docs/User_Manual/SSH.html) on your Volumio device. Then, in a terminal:
+If you see the Bandcamp Discover plugin in the Volumio plugin store (under 'Music Services'), you may install or update it from there. If you do not find it in the store or would like to manually install or update the plugin, you may follow the instructions below.
+
+### Manual Installation
+
+To install the plugin manually, first make sure you have [enabled SSH access](https://volumio.github.io/docs/User_Manual/SSH.html) on your Volumio device. Then, SSH into Volumio and do the following:
 
 ```
-$ ssh volumio@<your_Volumio_address>
+// SSH terminal:
+// (You can copy and paste each line after the $ sign)
 
 volumio:~$ mkdir bandcamp-plugin
 volumio:~$ cd bandcamp-plugin
@@ -27,12 +32,16 @@ Status :Bandcamp Discover Successfully Installed, Do you want to enable the plug
 
 Now access Volumio in a web browser. Go to ``Plugins -> Installed plugins`` and enable the Bandcamp Discover plugin by activating the switch next to it.
 
-### Updating
+### Manual Update
 
-When a new version of the plugin becomes available, you can ssh into your Volumio device and update as follows (assuming you have not deleted the directory which you cloned from this repo):
+Assuming you have manually installed the plugin with the instructions above, and you have not deleted the directory to which you cloned this repo, you can SSH into Volumio and manually update the plugin as follows:
 
 ```
+// SSH terminal:
+// (You can copy and paste each line after the $ sign)
+
 volumio:~$ cd ~/bandcamp-plugin/volumio-bandcamp/
+volumio:~/bandcamp-plugin/volumio-bandcamp$ rm -rf node_modules
 volumio:~/bandcamp-plugin/volumio-bandcamp$ git pull
 ...
 volumio:~/bandcamp-plugin/volumio-bandcamp$ volumio plugin update
@@ -44,7 +53,7 @@ Status :Successfully updated plugin
 
 // If the process appears to hang at this point, just press Ctrl-C to return to the terminal.
 
-volumio:~/bandcamp-plugin/volumio-bandcamp$ sudo systemctl restart volumio
+volumio:~/bandcamp-plugin/volumio-bandcamp$ systemctl restart volumio
 ```
 
 ## Limitations
