@@ -4,9 +4,16 @@ Volumio plugin for discovering Bandcamp music.
 
 *This plugin is not affiliated with Bandcamp whatsoever.*
 
-## Installation
+This repository has two branches:
 
-If you see the Bandcamp Discover plugin in the Volumio plugin store (under 'Music Services'), you may install or update it from there. If you do not find it in the store or would like to manually install or update the plugin, you may follow the instructions below.
+1. The `master` branch is targeted towards Volumio 3.
+2. The `volumio-2.x` branch is targeted towards Volumio 2.x.
+
+The focus is on the `master` branch. The `volumio-2.x` branch will only be maintained if it is practically feasible and still worthwhile to do so.
+
+## Getting Started
+
+As at the time of this readme, the plugin can be installed from the plugin store of Volumio 2.x. This may no longer be the case when Volumio 3 completely replaces Volumio 2. You can still manually install and update the plugin on Volumio 2.x by following the steps below.
 
 ### Manual Installation
 
@@ -20,6 +27,7 @@ volumio:~$ mkdir bandcamp-plugin
 volumio:~$ cd bandcamp-plugin
 volumio:~/bandcamp-plugin$ git clone https://github.com/patrickkfkan/volumio-bandcamp.git
 volumio:~/bandcamp-plugin$ cd volumio-bandcamp
+volumio:~/bandcamp-plugin/volumio-bandcamp$ git checkout volumio-2.x
 volumio:~/bandcamp-plugin/volumio-bandcamp$ volumio plugin install
 
 ...
@@ -42,6 +50,8 @@ Assuming you have manually installed the plugin with the instructions above, and
 
 volumio:~$ cd ~/bandcamp-plugin/volumio-bandcamp/
 volumio:~/bandcamp-plugin/volumio-bandcamp$ rm -rf node_modules
+volumio:~/bandcamp-plugin/volumio-bandcamp$ git pull
+volumio:~/bandcamp-plugin/volumio-bandcamp$ git checkout volumio-2.x
 volumio:~/bandcamp-plugin/volumio-bandcamp$ git pull
 ...
 volumio:~/bandcamp-plugin/volumio-bandcamp$ volumio plugin update
