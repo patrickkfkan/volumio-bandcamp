@@ -22,6 +22,10 @@ As the name implies, the purpose of this plugin is to allow you to discover musi
 
 ## Changelog
 
+0.1.1
+- Minor change to loading of translations
+- Update plugin for Volumio 3
+
 0.1.1-b.20211021
 - Prepare plugin for Volumio plugin store
 
