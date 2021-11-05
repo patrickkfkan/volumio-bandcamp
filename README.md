@@ -4,57 +4,12 @@ Volumio plugin for discovering Bandcamp music.
 
 *This plugin is not affiliated with Bandcamp whatsoever.*
 
-## Installation
+This repository has two branches:
 
-If you see the Bandcamp Discover plugin in the Volumio plugin store (under 'Music Services'), you may install or update it from there. If you do not find it in the store or would like to manually install or update the plugin, you may follow the instructions below.
+1. The `master` branch is targeted towards Volumio 3.
+2. The `volumio-2.x` branch is targeted towards Volumio 2.x.
 
-### Manual Installation
-
-To install the plugin manually, first make sure you have [enabled SSH access](https://volumio.github.io/docs/User_Manual/SSH.html) on your Volumio device. Then, SSH into Volumio and do the following:
-
-```
-// SSH terminal:
-// (You can copy and paste each line after the $ sign)
-
-volumio:~$ mkdir bandcamp-plugin
-volumio:~$ cd bandcamp-plugin
-volumio:~/bandcamp-plugin$ git clone https://github.com/patrickkfkan/volumio-bandcamp.git
-volumio:~/bandcamp-plugin$ cd volumio-bandcamp
-volumio:~/bandcamp-plugin/volumio-bandcamp$ volumio plugin install
-
-...
-Progress: 100
-Status :Bandcamp Discover Successfully Installed, Do you want to enable the plugin now?
-...
-
-// If the process appears to hang at this point, just press Ctrl-C to return to the terminal.
-```
-
-Now access Volumio in a web browser. Go to ``Plugins -> Installed plugins`` and enable the Bandcamp Discover plugin by activating the switch next to it.
-
-### Manual Update
-
-Assuming you have manually installed the plugin with the instructions above, and you have not deleted the directory to which you cloned this repo, you can SSH into Volumio and manually update the plugin as follows:
-
-```
-// SSH terminal:
-// (You can copy and paste each line after the $ sign)
-
-volumio:~$ cd ~/bandcamp-plugin/volumio-bandcamp/
-volumio:~/bandcamp-plugin/volumio-bandcamp$ rm -rf node_modules
-volumio:~/bandcamp-plugin/volumio-bandcamp$ git pull
-...
-volumio:~/bandcamp-plugin/volumio-bandcamp$ volumio plugin update
-
-This command will update the plugin on your device
-...
-Progress: 100
-Status :Successfully updated plugin
-
-// If the process appears to hang at this point, just press Ctrl-C to return to the terminal.
-
-volumio:~/bandcamp-plugin/volumio-bandcamp$ systemctl restart volumio
-```
+The focus is on the `master` branch. The `volumio-2.x` branch will only be maintained if it is practically feasible and still worthwhile to do so.
 
 ## Limitations
 
