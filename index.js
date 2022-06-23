@@ -209,7 +209,7 @@ ControllerBandcamp.prototype.goto = function(data) {
         return this.browseController.browseUri('bandcamp/album@albumUrl=' + trackView.albumUrl);
     }
     else if (data.type === 'artist' && trackView.artistUrl) {
-        return this.browseController.browseUri('bandcamp/artist@artistUrl=' + trackView.artistUrl);
+        return this.browseController.browseUri('bandcamp/band@bandUrl=' + trackView.artistUrl);
     }
     else if (trackView.name === 'show') {
         return this.browseController.browseUri('bandcamp/shows@showUrl=' + trackView.showUrl);
