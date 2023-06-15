@@ -145,14 +145,14 @@ export default class FanViewHandler extends BaseViewHandler<FanView> {
         'service': 'bandcamp',
         'type': 'item-no-menu',
         'title': bandcamp.getI18n('BANDCAMP_FOLLOWING_ARTISTS_AND_LABELS', fanInfo.followingArtistsAndLabelsCount),
-        'albumart': `/albumart?sourceicon=${baseImgPath}artisticon.png"`,
+        'albumart': `/albumart?sourceicon=${baseImgPath}artisticon.png`,
         'uri': `${baseUri}/${ViewHelper.constructUriSegmentFromView({...fanView, view: 'followingArtistsAndLabels'})}`
       },
       {
         'service': 'bandcamp',
         'type': 'item-no-menu',
         'title': bandcamp.getI18n('BANDCAMP_FOLLOWING_GENRES', fanInfo.followingGenresCount),
-        'albumart': `/albumart?sourceicon=${baseImgPath}genreicon.png"`,
+        'albumart': `/albumart?sourceicon=${baseImgPath}genreicon.png`,
         'uri': `${baseUri}/${ViewHelper.constructUriSegmentFromView({...fanView, view: 'followingGenres'})}`
       }
     ];

@@ -139,14 +139,14 @@ _FanViewHandler_instances = new WeakSet(), _FanViewHandler_browseList = async fu
             'service': 'bandcamp',
             'type': 'item-no-menu',
             'title': BandcampContext_1.default.getI18n('BANDCAMP_FOLLOWING_ARTISTS_AND_LABELS', fanInfo.followingArtistsAndLabelsCount),
-            'albumart': `/albumart?sourceicon=${baseImgPath}artisticon.png"`,
+            'albumart': `/albumart?sourceicon=${baseImgPath}artisticon.png`,
             'uri': `${baseUri}/${ViewHelper_1.default.constructUriSegmentFromView({ ...fanView, view: 'followingArtistsAndLabels' })}`
         },
         {
             'service': 'bandcamp',
             'type': 'item-no-menu',
             'title': BandcampContext_1.default.getI18n('BANDCAMP_FOLLOWING_GENRES', fanInfo.followingGenresCount),
-            'albumart': `/albumart?sourceicon=${baseImgPath}genreicon.png"`,
+            'albumart': `/albumart?sourceicon=${baseImgPath}genreicon.png`,
             'uri': `${baseUri}/${ViewHelper_1.default.constructUriSegmentFromView({ ...fanView, view: 'followingGenres' })}`
         }
     ];
