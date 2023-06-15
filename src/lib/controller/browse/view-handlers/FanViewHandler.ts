@@ -41,8 +41,8 @@ export default class FanViewHandler extends BaseViewHandler<FanView> {
     };
 
     if (view.pageRef) {
-      modelParams.pageToken = view.pageToken;
-      modelParams.pageOffset = view.pageOffset;
+      modelParams.pageToken = view.pageRef.pageToken;
+      modelParams.pageOffset = view.pageRef.pageOffset;
     }
 
     let fanItems;

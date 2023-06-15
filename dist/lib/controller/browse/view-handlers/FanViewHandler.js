@@ -43,8 +43,8 @@ _FanViewHandler_instances = new WeakSet(), _FanViewHandler_browseList = async fu
         limit: BandcampContext_1.default.getConfigValue('itemsPerPage', 47)
     };
     if (view.pageRef) {
-        modelParams.pageToken = view.pageToken;
-        modelParams.pageOffset = view.pageOffset;
+        modelParams.pageToken = view.pageRef.pageToken;
+        modelParams.pageOffset = view.pageRef.pageOffset;
     }
     let fanItems;
     const model = this.getModel(model_1.ModelType.Fan);
