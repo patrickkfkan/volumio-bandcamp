@@ -15,6 +15,10 @@ As the name implies, the purpose of this plugin is to allow you to discover musi
 
 ## Changelog
 
+1.0.3
+- Improve Manifest UI detection
+- Fix 'Goto artist / album' failing in some cases
+
 1.0.2
 - Fix fan item icon link typo
 - Fix fan items pagination
