@@ -15,6 +15,9 @@ As the name implies, the purpose of this plugin is to allow you to discover musi
 
 ## Changelog
 
+1.0.1
+- Fix plugin crashing on disable
+
 1.0.0
 - Rewrite in TypeScript
 - Add prefetch support
