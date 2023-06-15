@@ -149,7 +149,8 @@ export default class UIHelper {
   }
 
   static isManifestUI() {
+    const volumioManifestUIDir = '/volumio/http/www4';
     const volumioManifestUIDisabledFile = '/data/disableManifestUI';
-    return !existsSync(volumioManifestUIDisabledFile);
+    return existsSync(volumioManifestUIDir) && !existsSync(volumioManifestUIDisabledFile);
   }
 }
