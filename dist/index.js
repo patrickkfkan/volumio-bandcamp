@@ -140,7 +140,7 @@ class ControllerBandcamp {
         __classPrivateFieldSet(this, _ControllerBandcamp_searchController, null, "f");
         __classPrivateFieldSet(this, _ControllerBandcamp_playController, null, "f");
         BandcampContext_1.default.reset();
-        return kew_1.default.rseolve();
+        return kew_1.default.resolve();
     }
     getConfigurationFiles() {
         return ['config.json'];

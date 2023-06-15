@@ -169,7 +169,7 @@ class ControllerBandcamp {
 
     bandcamp.reset();
 
-    return libQ.rseolve();
+    return libQ.resolve();
   }
 
   getConfigurationFiles() {
