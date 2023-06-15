@@ -219,7 +219,7 @@ class ControllerBandcamp {
             try {
                 const views = ViewHelper_1.default.getViewsFromUri(data.uri);
                 const trackView = views[1];
-                if (!trackView || (trackView.name !== 'track' && trackView.name !== 'show' && trackView.name !== 'article')) {
+                if (!trackView) {
                     return __classPrivateFieldGet(this, _ControllerBandcamp_browseController, "f").browseUri('bandcamp');
                 }
                 let gotoView;
