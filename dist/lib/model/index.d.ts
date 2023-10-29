@@ -32,5 +32,6 @@ export default class Model {
     static get cookie(): string | null | undefined;
     static reset(): void;
     static clearLibCache(): void;
+    static ensureStreamURL(url: string): Promise<string | null>;
 }
 //# sourceMappingURL=index.d.ts.map

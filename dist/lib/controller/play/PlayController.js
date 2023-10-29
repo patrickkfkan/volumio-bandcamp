@@ -137,6 +137,16 @@ class PlayController {
 exports.default = PlayController;
 _PlayController_mpdPlugin = new WeakMap(), _PlayController_instances = new WeakSet(), _PlayController_getStreamUrl = async function _PlayController_getStreamUrl(track, isPrefetching = false) {
     let streamUrl = await __classPrivateFieldGet(this, _PlayController_instances, "m", _PlayController_doGetStreamUrl).call(this, track, isPrefetching);
+    // Ensure stream URL is valid
+    const ensuredUrl = await model_1.default.ensureStreamURL(streamUrl);
+    if (!ensuredUrl) {
+        if (!isPrefetching) {
+            BandcampContext_1.default.toast('error', BandcampContext_1.default.getI18n('BANDCAMP_ERR_REFRESH_STREAM', track.title));
+        }
+        throw Error(`Failed to refresh stream URL for ${track.title}: ${streamUrl}`);
+    }
+    // Safe
+    streamUrl = ensuredUrl.replace(/"/g, '\\"');
     /**
      * 1. Add bitrate info to track
      * 2. Fool MPD plugin to return correct `trackType` in `parseTrackInfo()` by adding

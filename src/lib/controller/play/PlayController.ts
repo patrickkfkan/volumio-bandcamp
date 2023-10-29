@@ -118,6 +118,19 @@ export default class PlayController {
 
   async #getStreamUrl(track: ExplodedTrackInfo, isPrefetching = false): Promise<string> {
     let streamUrl = await this.#doGetStreamUrl(track, isPrefetching);
+
+    // Ensure stream URL is valid
+    const ensuredUrl = await Model.ensureStreamURL(streamUrl);
+    if (!ensuredUrl) {
+      if (!isPrefetching) {
+        bandcamp.toast('error', bandcamp.getI18n('BANDCAMP_ERR_REFRESH_STREAM', track.title));
+      }
+      throw Error(`Failed to refresh stream URL for ${track.title}: ${streamUrl}`);
+    }
+
+    // Safe
+    streamUrl = ensuredUrl.replace(/"/g, '\\"');
+
     /**
      * 1. Add bitrate info to track
      * 2. Fool MPD plugin to return correct `trackType` in `parseTrackInfo()` by adding

@@ -57,6 +57,13 @@ class Model {
     static clearLibCache() {
         bandcamp_fetch_1.default.cache.clear();
     }
+    static async ensureStreamURL(url) {
+        const testResult = await bandcamp_fetch_1.default.stream.test(url);
+        if (testResult.ok) {
+            return url;
+        }
+        return await bandcamp_fetch_1.default.stream.refresh(url);
+    }
 }
 exports.default = Model;
 //# sourceMappingURL=index.js.map

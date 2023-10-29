@@ -67,4 +67,12 @@ export default class Model {
   static clearLibCache() {
     bcfetch.cache.clear();
   }
+
+  static async ensureStreamURL(url: string) {
+    const testResult = await bcfetch.stream.test(url);
+    if (testResult.ok) {
+      return url;
+    }
+    return await bcfetch.stream.refresh(url);
+  }
 }

@@ -95,6 +95,7 @@
   "BANDCAMP_SETTINGS_ERR_CACHE_MAX_ENTRIES": "Maximum entries must be at least 1000",
   "BANDCAMP_SETTINGS_ERR_CACHE_TTL": "Expiry time must be at least 600",
   "BANDCAMP_ERR_STREAM_NOT_FOUND": "Stream not found for {}",
+  "BANDCAMP_ERR_REFRESH_STREAM": "Failed to refresh stream URL for {}",
   "BANDCAMP_ERR_INVALID_PLAY_REQUEST": "Invalid play request",
   "BANDCAMP_ERR_MY_FAN_INFO": "Failed to obtain fan info by cookie",
   "BANDCAMP_MORE": "More...",
