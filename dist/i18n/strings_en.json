@@ -98,5 +98,5 @@
   "BANDCAMP_ERR_INVALID_PLAY_REQUEST": "Invalid play request",
   "BANDCAMP_ERR_MY_FAN_INFO": "Failed to obtain fan info by cookie",
   "BANDCAMP_MORE": "More...",
-  "BANDCAMP_DOC_MY_BANDCAMP_TYPE": "<ul><li>Cookie: a string value identifying the user session upon signing into the Bandcamp website. Providing this will allow you to access your private collection as well as high-quality MP3 streams of purchased media.</li><li>Username: providing just the username will give you access to public elements of your collection and standard-quality streams only.</li></ul>"
+  "BANDCAMP_DOC_MY_BANDCAMP_TYPE": "<ul><li>Cookie: a string value identifying the user session upon signing into the Bandcamp website. Providing this will allow you to access your private collection as well as high-quality MP3 streams of purchased media.</li><li>Username: providing just the username will give you access to the public elements of your collection and standard-quality streams only.</li></ul>"
 }
