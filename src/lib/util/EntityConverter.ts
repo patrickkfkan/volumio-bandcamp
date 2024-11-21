@@ -81,6 +81,9 @@ export default class EntityConverter {
       type: 'track',
       name: data.name
     };
+    if (data.id) {
+      result.id = data.id;
+    }
     if (data.url) {
       result.url = data.url;
     }
@@ -196,7 +199,7 @@ export default class EntityConverter {
     const result: TagEntity = {
       type: 'tag',
       name: data.name,
-      url: data.url
+      value: data.value
     };
 
     if (data.imageUrls?.[0]) {

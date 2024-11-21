@@ -2,6 +2,7 @@ import AlbumEntity from './AlbumEntity';
 import ArtistEntity from './ArtistEntity';
 interface TrackEntity {
     type: 'track';
+    id?: number;
     name: string;
     url?: string;
     duration?: number;

@@ -15,6 +15,7 @@ export interface AlbumView extends View {
   track?: string;
   // For explode track URIs (used by `goto()`)
   artistUrl?: string;
+  trackId?: string;
 }
 
 export default class AlbumViewHandler extends ExplodableViewHandler<AlbumView> {

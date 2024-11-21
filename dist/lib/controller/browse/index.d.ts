@@ -8,6 +8,7 @@ export default class BrowseController {
      * - track[@trackUrl=...]
      * - album[@albumUrl=...]
      * - shows[@showUrl=...]
+     * - discover[@...]
      */
     explodeUri(uri: string): Promise<ExplodedTrackInfo[]>;
 }

@@ -6,6 +6,7 @@ export interface AlbumView extends View {
     albumUrl: string;
     track?: string;
     artistUrl?: string;
+    trackId?: string;
 }
 export default class AlbumViewHandler extends ExplodableViewHandler<AlbumView> {
     #private;

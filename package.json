@@ -4,8 +4,7 @@
 	"description": "Discover Bandcamp music",
 	"main": "./dist/index.js",
 	"scripts": {
-		"build": "npm run prepare",
-		"prepare": "rm -rf dist && npx tsc --build src && bash fixup.sh",
+		"build": "rm -rf dist && npx tsc --build src && bash fixup.sh",
 		"lint": "npx eslint ./src",
 		"lint:fix": "npx eslint ./src --fix"
 	},
@@ -19,7 +18,7 @@
 		"prettyName": "Bandcamp Discover",
 		"plugin_type": "music_service",
 		"os": [
-			"buster"
+			"bookworm"
 		],
 		"icon": "fa-bandcamp",
 		"boot_priority": 10,
@@ -27,13 +26,12 @@
 		"changelog": "",
 		"architectures": [
 			"amd64",
-			"armhf",
-			"i386"
+			"armhf"
 		]
 	},
 	"engines": {
-		"node": ">=14",
-		"volumio": ">=3"
+		"node": ">=20",
+		"volumio": ">=0"
 	},
 	"devDependencies": {
 		"@types/fs-extra": "^8.1.2",
@@ -48,7 +46,7 @@
 		"winston": "^3.8.2"
 	},
 	"dependencies": {
-		"bandcamp-fetch": "^1.2.0",
+		"bandcamp-fetch": "file:dep/bandcamp-fetch-2.0.0.tgz",
 		"kew": "^0.7.0",
 		"md5": "^2.3.0",
 		"node-cache": "^5.1.2",

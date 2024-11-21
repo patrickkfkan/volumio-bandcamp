@@ -59,7 +59,7 @@ class PlayController {
      * - bandcamp/track@trackUrl={trackUrl}@artistUrl={...}@albumUrl={...}
      * - bandcamp/show@showUrl={showUrl}
      * - bandcamp/article@articleUrl={articleUrl}@mediaItemRef={...}@track={trackPosition}@artistUrl={...}@albumUrl={...}
-     * - bandcamp/album@albumUrl={...}@track={...}@artistUrl={...}@albumUrl={...}
+     * - bandcamp/album@albumUrl={...}@[track | trackId]={...}@artistUrl={...}@albumUrl={...}
      */
     async clearAddPlayTrack(track) {
         BandcampContext_1.default.getLogger().info(`[bandcamp-play] clearAddPlayTrack: ${track.uri}`);
@@ -254,19 +254,30 @@ _PlayController_mpdPlugin = new WeakMap(), _PlayController_prefetchPlaybackState
         throw Error(`Stream URL missing for track matching ${trackPosition ? `${trackPosition}@` : ''}${mediaItemRef} (article URL: ${articleUrl})`);
     }
     else if (trackView.name === 'album') {
-        const { albumUrl, track: trackPosition } = trackView;
-        if (!albumUrl || !trackPosition) {
-            throw Error('Album URL or track position not specified');
+        const { albumUrl, track: trackPosition, trackId } = trackView;
+        if (!albumUrl || (!trackPosition && !trackId)) {
+            throw Error('Album URL or track position / ID not specified');
         }
         const model = model_1.default.getInstance(model_1.ModelType.Album);
         const album = await model.getAlbum(albumUrl);
-        const albumTrack = album.tracks?.[parseInt(trackPosition, 10) - 1];
+        let albumTrack;
+        if (trackPosition !== undefined) {
+            albumTrack = album.tracks?.[parseInt(trackPosition, 10) - 1];
+        }
+        else if (trackId !== undefined) {
+            albumTrack = album.tracks?.find((track) => track.id !== undefined && String(track.id) === trackId);
+        }
         if (albumTrack?.streamUrl) {
             const safeUri = albumTrack.streamUrl.replace(/"/g, '\\"');
             return safeUri;
         }
         _toast('error', BandcampContext_1.default.getI18n('BANDCAMP_ERR_STREAM_NOT_FOUND', albumTrack?.name || track.name));
-        throw Error(`Track or stream URL missing at position ${trackPosition} for album URL: ${albumUrl}`);
+        if (trackPosition !== undefined) {
+            throw Error(`Track or stream URL missing at position ${trackPosition} for album URL: ${albumUrl}`);
+        }
+        if (trackId !== undefined) {
+            throw Error(`Track matching ID ${trackId} or its stream URL missing for album URL: ${albumUrl}`);
+        }
     }
     _toast('error', BandcampContext_1.default.getI18n('BANDCAMP_ERR_INVALID_PLAY_REQUEST'));
     throw Error(`Invalid track URI: ${track.uri}`);
