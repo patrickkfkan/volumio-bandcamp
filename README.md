@@ -12,6 +12,10 @@ As the name implies, the purpose of this plugin is to allow you to discover musi
 
 ## Changelog
 
+2.0.0
+- Release for Bookworm-based Volumio
+- Fix browsing / playback issues caused by Bandcamp changes
+
 1.1.1
 - Fix player state sometimes wrong when playing prefetched track
 
