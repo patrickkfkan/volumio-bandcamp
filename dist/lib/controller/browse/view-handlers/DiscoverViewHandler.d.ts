@@ -1,7 +1,7 @@
-import View from './View';
-import { RenderedPage } from './ViewHandler';
+import type View from './View';
+import { type RenderedPage } from './ViewHandler';
 import ExplodableViewHandler from './ExplodableViewHandler';
-import TrackEntity from '../../../entities/TrackEntity';
+import type TrackEntity from '../../../entities/TrackEntity';
 export interface DiscoverView extends View {
     name: 'discover';
     select?: 'genre' | 'subgenre' | 'sortBy' | 'location' | 'category' | 'time' | 'relatedTag';

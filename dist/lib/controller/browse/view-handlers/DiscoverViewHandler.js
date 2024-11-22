@@ -113,7 +113,6 @@ class DiscoverViewHandler extends ExplodableViewHandler_1.default {
         return super.getTrackUri(track);
     }
 }
-exports.default = DiscoverViewHandler;
 _DiscoverViewHandler_instances = new WeakSet(), _DiscoverViewHandler_browseDiscoverResult = async function _DiscoverViewHandler_browseDiscoverResult() {
     const view = this.currentView;
     const modelParams = {
@@ -424,4 +423,5 @@ _DiscoverViewHandler_instances = new WeakSet(), _DiscoverViewHandler_browseDisco
         targetView
     ]);
 };
+exports.default = DiscoverViewHandler;
 //# sourceMappingURL=DiscoverViewHandler.js.map

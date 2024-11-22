@@ -126,7 +126,6 @@ class TagViewHandler extends BaseViewHandler_1.default {
         return __classPrivateFieldGet(this, _TagViewHandler_instances, "m", _TagViewHandler_browseTags).call(this);
     }
 }
-exports.default = TagViewHandler;
 _TagViewHandler_instances = new WeakSet(), _TagViewHandler_browseTags = async function _TagViewHandler_browseTags() {
     const tags = await this.getModel(model_1.ModelType.Tag).getTags();
     const lists = [
@@ -154,4 +153,5 @@ _TagViewHandler_instances = new WeakSet(), _TagViewHandler_browseTags = async fu
         items: listItems
     };
 };
+exports.default = TagViewHandler;
 //# sourceMappingURL=TagViewHandler.js.map

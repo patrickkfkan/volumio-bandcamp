@@ -39,7 +39,6 @@ class DiscoverModel extends BaseModel_1.default {
         });
     }
 }
-exports.default = DiscoverModel;
 _DiscoverModel_instances = new WeakSet(), _DiscoverModel_getDiscoverResultFetchPromise = function _DiscoverModel_getDiscoverResultFetchPromise(params) {
     const queryParams = (() => {
         if (params.pageToken) {
@@ -81,4 +80,5 @@ _DiscoverModel_instances = new WeakSet(), _DiscoverModel_getDiscoverResultFetchP
     };
     return r;
 };
+exports.default = DiscoverModel;
 //# sourceMappingURL=DiscoverModel.js.map

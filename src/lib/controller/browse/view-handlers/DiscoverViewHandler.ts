@@ -1,16 +1,16 @@
-import { DiscoverOptions, DiscoverParams } from 'bandcamp-fetch';
+import { type DiscoverOptions, type DiscoverParams } from 'bandcamp-fetch';
 import bandcamp from '../../../BandcampContext';
-import View from './View';
-import { RenderedList, RenderedPage } from './ViewHandler';
+import type View from './View';
+import { type RenderedList, type RenderedPage } from './ViewHandler';
 import { ModelType } from '../../../model';
 import ViewHelper from './ViewHelper';
 import { RendererType } from './renderers';
-import { RenderedListItem } from './renderers/BaseRenderer';
-import { DiscoverLoopFetchResult, DiscoveryModelGetDiscoverResultParams } from '../../../model/DiscoverModel';
-import UIHelper, { UILink, UI_STYLES } from '../../../util/UIHelper';
+import { type RenderedListItem } from './renderers/BaseRenderer';
+import { type DiscoverLoopFetchResult, type DiscoveryModelGetDiscoverResultParams } from '../../../model/DiscoverModel';
+import UIHelper, { type UILink, UI_STYLES } from '../../../util/UIHelper';
 import ExplodableViewHandler from './ExplodableViewHandler';
-import TrackEntity from '../../../entities/TrackEntity';
-import { AlbumView } from './AlbumViewHandler';
+import type TrackEntity from '../../../entities/TrackEntity';
+import { type AlbumView } from './AlbumViewHandler';
 
 export interface DiscoverView extends View {
   name: 'discover';

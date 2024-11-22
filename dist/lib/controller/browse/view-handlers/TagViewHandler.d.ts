@@ -1,5 +1,5 @@
-import View from './View';
-import { RenderedPage } from './ViewHandler';
+import type View from './View';
+import { type RenderedPage } from './ViewHandler';
 import BaseViewHandler from './BaseViewHandler';
 export interface TagView extends View {
     name: 'tag';

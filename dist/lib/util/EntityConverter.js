@@ -109,10 +109,11 @@ class EntityConverter {
                 return this.convertArtist(item);
             case 'label':
                 return this.convertLabel(item);
-            case 'album':
+            case 'album': {
                 const albumArtist = item.artist ? { name: item.artist } : undefined;
                 return this.convertAlbum({ ...item, artist: albumArtist });
-            case 'track':
+            }
+            case 'track': {
                 const trackArtist = item.artist ? { name: item.artist } : undefined;
                 const trackAlbum = item.album ? { name: item.album } : undefined;
                 return this.convertTrack({
@@ -120,6 +121,7 @@ class EntityConverter {
                     artist: trackArtist,
                     album: trackAlbum
                 });
+            }
         }
     }
     static convertShow(data) {

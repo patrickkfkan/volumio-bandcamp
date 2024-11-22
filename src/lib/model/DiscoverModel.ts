@@ -1,7 +1,7 @@
-import bcfetch, { Album, DiscoverParams, DiscoverResult, DiscoverResultContinuation } from 'bandcamp-fetch';
+import bcfetch, { type Album, type DiscoverParams, type DiscoverResult, type DiscoverResultContinuation } from 'bandcamp-fetch';
 import bandcamp from '../BandcampContext';
-import BaseModel, { LoopFetchCallbackParams, LoopFetchResult } from './BaseModel';
-import AlbumEntity from '../entities/AlbumEntity';
+import BaseModel, { type LoopFetchCallbackParams, type LoopFetchResult } from './BaseModel';
+import type AlbumEntity from '../entities/AlbumEntity';
 import EntityConverter from '../util/EntityConverter';
 
 export interface DiscoveryModelGetDiscoverResultParams {
@@ -57,7 +57,7 @@ export default class DiscoverModel extends BaseModel {
   }
 
   #getDiscoverItemsFromFetchResult(result: DiscoverResult) {
-    return result.items.filter((value) => value.type === 'album') as Album[];
+    return result.items.filter((value) => value.type === 'album');
   }
 
   #getNextPageTokenFromDiscoverFetchResult(result: DiscoverResult, params: GetDiscoverResultLoopFetchCallbackParams) {

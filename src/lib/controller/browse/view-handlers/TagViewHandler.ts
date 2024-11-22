@@ -1,12 +1,12 @@
 import bandcamp from '../../../BandcampContext';
-import TagEntity from '../../../entities/TagEntity';
+import type TagEntity from '../../../entities/TagEntity';
 import { ModelType } from '../../../model';
 import UIHelper, { UI_STYLES } from '../../../util/UIHelper';
-import View from './View';
-import { RenderedList, RenderedPage } from './ViewHandler';
+import type View from './View';
+import { type RenderedList, type RenderedPage } from './ViewHandler';
 import ViewHelper from './ViewHelper';
 import { RendererType } from './renderers';
-import { RenderedListItem } from './renderers/BaseRenderer';
+import { type RenderedListItem } from './renderers/BaseRenderer';
 import TrackEntity from '../../../entities/TrackEntity';
 import ExplodableViewHandler from './ExplodableViewHandler';
 import { AlbumView } from './AlbumViewHandler';

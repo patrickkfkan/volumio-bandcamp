@@ -1,8 +1,8 @@
 import bandcamp from '../../../../BandcampContext';
-import BaseRenderer, { RenderedHeader, RenderedListItem } from './BaseRenderer';
-import TagEntity from '../../../../entities/TagEntity';
+import BaseRenderer, { type RenderedHeader, type RenderedListItem } from './BaseRenderer';
+import type TagEntity from '../../../../entities/TagEntity';
 import ViewHelper from '../ViewHelper';
-import { DiscoverView } from '../DiscoverViewHandler';
+import { type DiscoverView } from '../DiscoverViewHandler';
 
 export default class TagRenderer extends BaseRenderer<TagEntity> {
 

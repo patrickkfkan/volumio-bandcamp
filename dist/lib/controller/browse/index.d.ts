@@ -1,5 +1,5 @@
-import { ExplodedTrackInfo } from './view-handlers/ExplodableViewHandler';
-import { RenderedPage } from './view-handlers/ViewHandler';
+import { type ExplodedTrackInfo } from './view-handlers/ExplodableViewHandler';
+import { type RenderedPage } from './view-handlers/ViewHandler';
 export default class BrowseController {
     #private;
     browseUri(uri: string): Promise<RenderedPage>;

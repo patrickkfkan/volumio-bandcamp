@@ -1,4 +1,4 @@
-import { ExplodedTrackInfo } from '../browse/view-handlers/ExplodableViewHandler';
+import { type ExplodedTrackInfo } from '../browse/view-handlers/ExplodableViewHandler';
 export default class PlayController {
     #private;
     constructor();

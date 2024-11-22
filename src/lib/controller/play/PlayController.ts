@@ -3,16 +3,16 @@
 import libQ from 'kew';
 
 import bandcamp from '../../BandcampContext';
-import { ExplodedTrackInfo } from '../browse/view-handlers/ExplodableViewHandler';
+import { type ExplodedTrackInfo } from '../browse/view-handlers/ExplodableViewHandler';
 import ViewHelper from '../browse/view-handlers/ViewHelper';
 import Model, { ModelType } from '../../model';
-import { TrackView } from '../browse/view-handlers/TrackViewHandler';
-import { ShowView } from '../browse/view-handlers/ShowViewHandler';
-import { ArticleView } from '../browse/view-handlers/ArticleViewHandler';
-import AlbumEntity from '../../entities/AlbumEntity';
-import { ArticleEntityMediaItem } from '../../entities/ArticleEntity';
-import TrackEntity from '../../entities/TrackEntity';
-import { AlbumView } from '../browse/view-handlers/AlbumViewHandler';
+import { type TrackView } from '../browse/view-handlers/TrackViewHandler';
+import { type ShowView } from '../browse/view-handlers/ShowViewHandler';
+import { type ArticleView } from '../browse/view-handlers/ArticleViewHandler';
+import type AlbumEntity from '../../entities/AlbumEntity';
+import { type ArticleEntityMediaItem } from '../../entities/ArticleEntity';
+import type TrackEntity from '../../entities/TrackEntity';
+import { type AlbumView } from '../browse/view-handlers/AlbumViewHandler';
 import { kewToJSPromise } from '../../util';
 import EventEmitter from 'events';
 

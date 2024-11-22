@@ -1,8 +1,8 @@
 import bandcamp from '../../BandcampContext';
-import BaseViewHandler from './view-handlers/BaseViewHandler';
-import { ExplodedTrackInfo } from './view-handlers/ExplodableViewHandler';
-import View from './view-handlers/View';
-import { RenderedPage } from './view-handlers/ViewHandler';
+import type BaseViewHandler from './view-handlers/BaseViewHandler';
+import { type ExplodedTrackInfo } from './view-handlers/ExplodableViewHandler';
+import type View from './view-handlers/View';
+import { type RenderedPage } from './view-handlers/ViewHandler';
 import ViewHandlerFactory from './view-handlers/ViewHandlerFactory';
 
 export default class BrowseController {

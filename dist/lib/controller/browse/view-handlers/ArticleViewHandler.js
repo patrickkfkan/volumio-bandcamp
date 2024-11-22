@@ -139,7 +139,6 @@ class ArticleViewHandler extends ExplodableViewHandler_1.default {
         return uri;
     }
 }
-exports.default = ArticleViewHandler;
 _ArticleViewHandler_instances = new WeakSet(), _ArticleViewHandler_browseList = async function _ArticleViewHandler_browseList() {
     const category = await __classPrivateFieldGet(this, _ArticleViewHandler_instances, "m", _ArticleViewHandler_getCategoryFromUriOrDefault).call(this);
     if (!category.url) {
@@ -475,4 +474,5 @@ _ArticleViewHandler_instances = new WeakSet(), _ArticleViewHandler_browseList = 
         }
     };
 };
+exports.default = ArticleViewHandler;
 //# sourceMappingURL=ArticleViewHandler.js.map

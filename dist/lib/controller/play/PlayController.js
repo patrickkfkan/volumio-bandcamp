@@ -144,7 +144,6 @@ class PlayController {
         return res;
     }
 }
-exports.default = PlayController;
 _PlayController_mpdPlugin = new WeakMap(), _PlayController_prefetchPlaybackStateFixer = new WeakMap(), _PlayController_instances = new WeakSet(), _PlayController_getStreamUrl = async function _PlayController_getStreamUrl(track, isPrefetching = false) {
     let streamUrl = await __classPrivateFieldGet(this, _PlayController_instances, "m", _PlayController_doGetStreamUrl).call(this, track, isPrefetching);
     // Ensure stream URL is valid
@@ -317,6 +316,7 @@ _PlayController_mpdPlugin = new WeakMap(), _PlayController_prefetchPlaybackState
     }
     return kew_1.default.resolve();
 };
+exports.default = PlayController;
 /**
  * (Taken from YouTube Music plugin)
  * https://github.com/patrickkfkan/volumio-ytmusic/blob/master/src/lib/controller/play/PlayController.ts
