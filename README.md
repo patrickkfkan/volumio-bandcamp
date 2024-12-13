@@ -12,6 +12,9 @@ As the name implies, the purpose of this plugin is to allow you to discover musi
 
 ## Changelog
 
+1.2.0 (Buster backport)
+- Backport from main branch v2.0.0
+
 2.0.0
 - Release for Bookworm-based Volumio
 - Fix browsing / playback issues caused by Bandcamp changes

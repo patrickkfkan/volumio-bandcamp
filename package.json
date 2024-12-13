@@ -1,12 +1,10 @@
 {
 	"name": "bandcamp",
-	"version": "2.0.0",
+	"version": "1.2.0",
 	"description": "Discover Bandcamp music",
 	"main": "./dist/index.js",
 	"scripts": {
-		"build": "rm -rf dist && npx tsc --build src && bash fixup.sh",
-		"lint": "npx eslint ./src",
-		"lint:fix": "npx eslint ./src --fix"
+		"build": "rm -rf dist && npx tsc --build src && bash fixup.sh"
 	},
 	"repository": {
 		"type": "git",
@@ -18,7 +16,7 @@
 		"prettyName": "Bandcamp Discover",
 		"plugin_type": "music_service",
 		"os": [
-			"bookworm"
+			"buster"
 		],
 		"icon": "fa-bandcamp",
 		"boot_priority": 10,
@@ -30,23 +28,19 @@
 		]
 	},
 	"engines": {
-		"node": ">=20",
-		"volumio": ">=0"
+		"node": ">=14",
+		"volumio": ">=3"
 	},
 	"devDependencies": {
 		"@types/fs-extra": "^8.1.2",
 		"@types/md5": "^2.3.2",
 		"@types/node": "^20.5.1",
 		"@types/string-format": "^2.0.0",
-		"@typescript-eslint/eslint-plugin": "^8.6.0",
-		"@typescript-eslint/parser": "^8.6.0",
-		"eslint": "^9.10.0",
 		"typescript": "^5.5.4",
-		"typescript-eslint": "^8.6.0",
 		"winston": "^3.8.2"
 	},
 	"dependencies": {
-		"bandcamp-fetch": "^2.0.0",
+		"bandcamp-fetch": "file:dep/bandcamp-fetch-2.0.0-node14-compat.tgz",
 		"kew": "^0.7.0",
 		"md5": "^2.3.0",
 		"node-cache": "^5.1.2",
