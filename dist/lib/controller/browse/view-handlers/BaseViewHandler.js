@@ -55,8 +55,8 @@ class BaseViewHandler {
         __classPrivateFieldSet(this, _BaseViewHandler_models, {}, "f");
         __classPrivateFieldSet(this, _BaseViewHandler_renderers, {}, "f");
     }
-    async browse() {
-        return {};
+    browse() {
+        return Promise.resolve({});
     }
     explode() {
         throw Error('Operation not supported');
@@ -102,7 +102,7 @@ class BaseViewHandler {
                     model = model_1.default.getInstance(model_1.ModelType.Track);
                     break;
                 default:
-                    throw Error(`Unknown model type: ${type}`);
+                    throw Error(`Unknown model type: ${String(type)}`);
             }
             __classPrivateFieldGet(this, _BaseViewHandler_models, "f")[type] = model;
         }
@@ -134,7 +134,7 @@ class BaseViewHandler {
                     renderer = renderers_1.default.getInstance(renderers_1.RendererType.Track, __classPrivateFieldGet(this, _BaseViewHandler_uri, "f"), __classPrivateFieldGet(this, _BaseViewHandler_currentView, "f"), __classPrivateFieldGet(this, _BaseViewHandler_previousViews, "f"));
                     break;
                 default:
-                    throw Error(`Unknown renderer type: ${type}`);
+                    throw Error(`Unknown renderer type: ${String(type)}`);
             }
             __classPrivateFieldGet(this, _BaseViewHandler_renderers, "f")[type] = renderer;
         }
@@ -199,6 +199,6 @@ class BaseViewHandler {
         };
     }
 }
-exports.default = BaseViewHandler;
 _BaseViewHandler_uri = new WeakMap(), _BaseViewHandler_currentView = new WeakMap(), _BaseViewHandler_previousViews = new WeakMap(), _BaseViewHandler_models = new WeakMap(), _BaseViewHandler_renderers = new WeakMap();
+exports.default = BaseViewHandler;
 //# sourceMappingURL=BaseViewHandler.js.map
