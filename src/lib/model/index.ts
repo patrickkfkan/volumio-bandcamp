@@ -1,4 +1,4 @@
-import bcfetch from 'bandcamp-fetch';
+import bcfetch, { Logger } from 'bandcamp-fetch';
 import AlbumModel from './AlbumModel';
 import ArticleModel from './ArticleModel';
 import BandModel from './BandModel';
@@ -36,8 +36,16 @@ const MODEL_TYPE_TO_CLASS: Record<any, any> = {
 
 export default class Model {
 
+  static #logger: Logger;
+
   static {
     bcfetch.setPuppeteerExecutablePath('/usr/bin/chromium-headless-shell');
+    this.#logger = {
+      info: (msg) => bandcamp.getLogger().info(`[bandcamp] (bcfetch) ${msg}`),
+      warn: (msg) => bandcamp.getLogger().warn(`[bandcamp] (bcfetch) ${msg}`),
+      debug: (msg) => bandcamp.getLogger().verbose(`[bandcamp] (bcfetch) ${msg}`),
+      error: (msg) => bandcamp.getLogger().error(`[bandcamp] (bcfetch) ${msg}`)
+    };
   }
 
   static getInstance(type: ModelType.Album): AlbumModel;
@@ -62,6 +70,15 @@ export default class Model {
 
   static get cookie() {
     return bcfetch.cookie;
+  }
+
+  static setLogDebugMessages(value: boolean) {
+    if (value) {
+      bcfetch.setLogger(this.#logger);
+    }
+    else {
+      bcfetch.setLogger(null);
+    }
   }
 
   static reset() {

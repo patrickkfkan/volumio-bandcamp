@@ -83,6 +83,7 @@
   "BANDCAMP_COMBINED_SEARCH_RESULTS": "Items in combined search results",
   "BANDCAMP_SEARCH_BY_ITEM_TYPE": "Display search results by item type",
   "BANDCAMP_PREFETCH_NEXT_TRACK": "Prefetch next track",
+  "BANDCAMP_LOG_DEBUG_MESSAGES": "Log debug messages",
   "BANDCAMP_SAVE": "Save",
   "BANDCAMP_SECTION_CACHE": "Cache",
   "BANDCAMP_CACHE_STATS": "There are currently {} entries in cache, using approximately {} KB of memory.",

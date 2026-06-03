@@ -60,6 +60,7 @@ class ControllerBandcamp {
       generalUIConf.content[1].value = bandcamp.getConfigValue('combinedSearchResults', 17);
       generalUIConf.content[2].value = bandcamp.getConfigValue('searchByItemType', true);
       generalUIConf.content[3].value = bandcamp.getConfigValue('prefetch', true);
+      generalUIConf.content[4].value = bandcamp.getConfigValue('logDebugMessages', false);
 
       // My Bandcamp
       const myBandcampType = bandcamp.getConfigValue('myBandcampType', 'cookie');
@@ -112,6 +113,9 @@ class ControllerBandcamp {
     bandcamp.setConfigValue('combinedSearchResults', combinedSearchResults);
     bandcamp.setConfigValue('searchByItemType', data.searchByItemType);
     bandcamp.setConfigValue('prefetch', data.prefetch);
+    bandcamp.setConfigValue('logDebugMessages', data.logDebugMessages);
+
+    Model.setLogDebugMessages(data.logDebugMessages);
 
     bandcamp.toast('success', bandcamp.getI18n('BANDCAMP_SETTINGS_SAVED'));
   }
@@ -185,6 +189,7 @@ class ControllerBandcamp {
         Model.setCookie(myCookie);
       }
     }
+    Model.setLogDebugMessages(bandcamp.getConfigValue('logDebugMessages', false));
 
     this.#browseController = new BrowseController();
     this.#searchController = new SearchController();
