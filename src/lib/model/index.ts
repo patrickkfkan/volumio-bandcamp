@@ -8,6 +8,7 @@ import SearchModel from './SearchModel';
 import ShowModel from './ShowModel';
 import TagModel from './TagModel';
 import TrackModel from './TrackModel';
+import bandcamp from '../BandcampContext';
 
 export enum ModelType {
   Album = 'Album',
@@ -34,6 +35,10 @@ const MODEL_TYPE_TO_CLASS: Record<any, any> = {
 };
 
 export default class Model {
+
+  static {
+    bcfetch.setPuppeteerExecutablePath('/usr/bin/chromium-headless-shell');
+  }
 
   static getInstance(type: ModelType.Album): AlbumModel;
   static getInstance(type: ModelType.Article): ArticleModel;
