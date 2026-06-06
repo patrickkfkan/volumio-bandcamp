@@ -1,4 +1,4 @@
-import { type Album, type Article, type ArticleListItem, type Artist, type Label, type LabelArtist, type SearchResultAlbum, type SearchResultArtist, type SearchResultLabel, type SearchResultTrack, type Show, type Tag, type Track, type UserKind } from 'bandcamp-fetch';
+import { Playlist, PlaylistListItem, type Album, type Article, type ArticleListItem, type Artist, type Label, type LabelArtist, type SearchResultAlbum, type SearchResultArtist, type SearchResultLabel, type SearchResultTrack, type Show, type Tag, type Track, type UserKind } from 'bandcamp-fetch';
 import type AlbumEntity from '../entities/AlbumEntity';
 import type ArtistEntity from '../entities/ArtistEntity';
 import type BandEntity from '../entities/BandEntity';
@@ -8,6 +8,7 @@ import type TagEntity from '../entities/TagEntity';
 import type ShowEntity from '../entities/ShowEntity';
 import {type ArticleEntityMediaItem, type ArticleEntitySection} from '../entities/ArticleEntity';
 import type ArticleEntity from '../entities/ArticleEntity';
+import { PlaylistEntity, PlaylistListItemEntity } from '../entities/PlaylistEntity';
 
 export default class EntityConverter {
   static convertAlbum(data: Album): AlbumEntity {
@@ -294,5 +295,39 @@ export default class EntityConverter {
     }
 
     return result;
+  }
+
+  static convertPlaylistListItem(data: PlaylistListItem): PlaylistListItemEntity {
+    return {
+      type: 'playlist',
+      ...data
+    };
+  }
+
+  static convertPlaylist(data: Playlist): PlaylistEntity {
+    return {
+      type: 'playlist',
+      ...data,
+      tracks: data.tracks.map((track, i) => ({
+        type: 'track',
+        id: track.id,
+        name: track.title,
+        url: track.url,
+        duration: track.duration,
+        thumbnail: track.imageUrl ?? undefined,
+        streamUrl: track.streamUrl ?? undefined,
+        position: i,
+        album: track.album ? {
+          type: 'album',
+          name: track.album.title,
+          url: track.album.url
+        } : undefined,
+        artist: track.artist ? {
+          type: 'artist',
+          name: track.artist.name,
+          thumbnail: track.artist.imageUrl ?? undefined,
+        } : undefined
+      } satisfies TrackEntity))
+    };
   }
 }

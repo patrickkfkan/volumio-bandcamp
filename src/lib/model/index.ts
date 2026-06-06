@@ -9,6 +9,7 @@ import ShowModel from './ShowModel';
 import TagModel from './TagModel';
 import TrackModel from './TrackModel';
 import bandcamp from '../BandcampContext';
+import PlaylistModel from './PlaylistModel';
 
 export enum ModelType {
   Album = 'Album',
@@ -19,7 +20,8 @@ export enum ModelType {
   Search = 'Search',
   Show = 'Show',
   Tag = 'Tag',
-  Track = 'Track'
+  Track = 'Track',
+  Playlist = 'Playlist'
 }
 
 const MODEL_TYPE_TO_CLASS: Record<any, any> = {
@@ -31,7 +33,8 @@ const MODEL_TYPE_TO_CLASS: Record<any, any> = {
   [ModelType.Search]: SearchModel,
   [ModelType.Show]: ShowModel,
   [ModelType.Tag]: TagModel,
-  [ModelType.Track]: TrackModel
+  [ModelType.Track]: TrackModel,
+  [ModelType.Playlist]: PlaylistModel
 };
 
 export default class Model {
@@ -54,6 +57,7 @@ export default class Model {
   static getInstance(type: ModelType.Discover): DiscoverModel;
   static getInstance(type: ModelType.Fan): FanModel;
   static getInstance(type: ModelType.Search): SearchModel;
+  static getInstance(type: ModelType.Playlist): PlaylistModel;
   static getInstance(type: ModelType.Show): ShowModel;
   static getInstance(type: ModelType.Tag): TagModel;
   static getInstance(type: ModelType.Track): TrackModel;

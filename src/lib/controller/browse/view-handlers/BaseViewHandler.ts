@@ -5,6 +5,7 @@ import type BandModel from '../../../model/BandModel';
 import type BaseModel from '../../../model/BaseModel';
 import type DiscoverModel from '../../../model/DiscoverModel';
 import type FanModel from '../../../model/FanModel';
+import PlaylistModel from '../../../model/PlaylistModel';
 import type SearchModel from '../../../model/SearchModel';
 import type ShowModel from '../../../model/ShowModel';
 import type TagModel from '../../../model/TagModel';
@@ -22,6 +23,7 @@ import type ArticleRenderer from './renderers/ArticleRenderer';
 import type BandRenderer from './renderers/BandRenderer';
 import {type RenderedListItem} from './renderers/BaseRenderer';
 import type BaseRenderer from './renderers/BaseRenderer';
+import PlaylistRenderer from './renderers/PlaylistRenderer';
 import type SearchResultRenderer from './renderers/SearchResultParser';
 import type ShowRenderer from './renderers/ShowRenderer';
 import type TagRenderer from './renderers/TagRenderer';
@@ -72,6 +74,7 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
   getModel(type: ModelType.Show): ShowModel;
   getModel(type: ModelType.Tag): TagModel;
   getModel(type: ModelType.Track): TrackModel;
+  getModel(type: ModelType.Playlist): PlaylistModel;
   getModel(type: ModelType) {
     if (!this.#models[type]) {
       let model;
@@ -103,6 +106,9 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
         case ModelType.Track:
           model = Model.getInstance(ModelType.Track);
           break;
+        case ModelType.Playlist:
+          model = Model.getInstance(ModelType.Playlist);
+          break;
         default:
           throw Error(`Unknown model type: ${String(type)}`);
       }
@@ -119,6 +125,7 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
   getRenderer(type: RendererType.Show): ShowRenderer;
   getRenderer(type: RendererType.Tag): TagRenderer;
   getRenderer(type: RendererType.Track): TrackRenderer;
+  getRenderer(type: RendererType.Playlist): PlaylistRenderer;
   getRenderer(type: RendererType) {
     if (!this.#renderers[type]) {
       let renderer;
@@ -149,6 +156,10 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
           break;
         case RendererType.Track:
           renderer = Renderer.getInstance(RendererType.Track, this.#uri,
+            this.#currentView, this.#previousViews);
+          break;
+        case RendererType.Playlist:
+          renderer = Renderer.getInstance(RendererType.Playlist, this.#uri,
             this.#currentView, this.#previousViews);
           break;
         default:

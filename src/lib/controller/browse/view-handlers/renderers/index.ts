@@ -2,6 +2,7 @@ import type View from '../View';
 import AlbumRenderer from './AlbumRenderer';
 import ArticleRenderer from './ArticleRenderer';
 import BandRenderer from './BandRenderer';
+import PlaylistRenderer from './PlaylistRenderer';
 import SearchResultRenderer from './SearchResultParser';
 import ShowRenderer from './ShowRenderer';
 import TagRenderer from './TagRenderer';
@@ -14,7 +15,8 @@ export enum RendererType {
   SearchResult = 'Discover',
   Show = 'Fan',
   Tag = 'Search',
-  Track = 'Show'
+  Track = 'Show',
+  Playlist = 'Playlist'
 }
 
 const RENDERER_TYPE_TO_CLASS: Record<any, any> = {
@@ -24,7 +26,8 @@ const RENDERER_TYPE_TO_CLASS: Record<any, any> = {
   [RendererType.SearchResult]: SearchResultRenderer,
   [RendererType.Show]: ShowRenderer,
   [RendererType.Tag]: TagRenderer,
-  [RendererType.Track]: TrackRenderer
+  [RendererType.Track]: TrackRenderer,
+  [RendererType.Playlist]: PlaylistRenderer
 };
 
 export default class Renderer {
@@ -36,6 +39,7 @@ export default class Renderer {
   static getInstance(type: RendererType.Show, uri: string, currentView: View, previousViews: View[]): ShowRenderer;
   static getInstance(type: RendererType.Tag, uri: string, currentView: View, previousViews: View[]): TagRenderer;
   static getInstance(type: RendererType.Track, uri: string, currentView: View, previousViews: View[]): TrackRenderer;
+  static getInstance(type: RendererType.Playlist, uri: string, currentView: View, previousViews: View[]): PlaylistRenderer;
   static getInstance(type: RendererType, uri: string, currentView: View, previousViews: View[]) {
     if (RENDERER_TYPE_TO_CLASS[type]) {
       return new RENDERER_TYPE_TO_CLASS[type](uri, currentView, previousViews);

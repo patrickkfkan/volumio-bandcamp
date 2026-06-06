@@ -4,6 +4,7 @@ import BandViewHandler from './BandViewHandler';
 import type BaseViewHandler from './BaseViewHandler';
 import DiscoverViewHandler from './DiscoverViewHandler';
 import FanViewHandler from './FanViewHandler';
+import PlaylistViewHandler from './PlaylistViewHandler';
 import RootViewHandler from './RootViewHandler';
 import SearchViewHandler from './SearchViewHandler';
 import ShowViewHandler from './ShowViewHandler';
@@ -25,7 +26,8 @@ const VIEW_NAME_TO_CLASS: Record<string, HandlerClass<any, any>> = {
   'show': ShowViewHandler,
   'article': ArticleViewHandler,
   'tag': TagViewHandler,
-  'fan': FanViewHandler
+  'fan': FanViewHandler,
+  'playlist': PlaylistViewHandler
 };
 
 export default class ViewHandlerFactory {

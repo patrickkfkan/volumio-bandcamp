@@ -9,6 +9,7 @@ import { type RenderedListItem } from './renderers/BaseRenderer';
 import UIHelper, { type UILink } from '../../../util/UIHelper';
 import { type FanModelGetFanItemsParams } from '../../../model/FanModel';
 import ViewHelper from './ViewHelper';
+import { PlaylistView } from './PlaylistViewHandler';
 
 export interface FanView extends View {
   name: 'fan';
@@ -156,6 +157,22 @@ export default class FanViewHandler extends BaseViewHandler<FanView> {
         'uri': `${baseUri}/${ViewHelper.constructUriSegmentFromView({...fanView, view: 'followingGenres'})}`
       }
     ];
+
+    const playlistCount = await this.getModel(ModelType.Playlist).getPlaylistCount(fanInfo.fanId);
+    if (playlistCount > 0) {
+      const playlistView: PlaylistView = {
+        name: 'playlist',
+        username: fanInfo.username
+      };
+      summaryItems.push({
+        'service': 'bandcamp',
+        'type': 'item-no-menu',
+        'title': bandcamp.getI18n('BANDCAMP_PLAYLISTS', playlistCount),
+        'albumart': `/albumart?sourceicon=${baseImgPath}playlisticon.png`,
+        'uri': `${baseUri}/${ViewHelper.constructUriSegmentFromView(playlistView)}`
+      });
+    }
+
     const summaryItemsList: RenderedList = {
       availableListViews: [ 'list', 'grid' ],
       items: summaryItems
