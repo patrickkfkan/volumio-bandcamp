@@ -11,7 +11,7 @@ import type ShowModel from '../../../model/ShowModel';
 import type TagModel from '../../../model/TagModel';
 import type TrackModel from '../../../model/TrackModel';
 import UIHelper from '../../../util/UIHelper';
-import { type ExplodedTrackInfo } from './ExplodableViewHandler';
+import { type QueueItem } from './ExplodableViewHandler';
 import {type PageRef} from './View';
 import type View from './View';
 import {type RenderedPage} from './ViewHandler';
@@ -49,7 +49,7 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
     return Promise.resolve({});
   }
 
-  explode(): Promise<ExplodedTrackInfo[]> {
+  explode(): Promise<QueueItem[]> {
     throw Error('Operation not supported');
   }
 

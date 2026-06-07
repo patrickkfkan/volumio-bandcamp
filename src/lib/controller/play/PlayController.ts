@@ -3,7 +3,7 @@
 import libQ from 'kew';
 
 import bandcamp from '../../BandcampContext';
-import { type ExplodedTrackInfo } from '../browse/view-handlers/ExplodableViewHandler';
+import { type QueueItem } from '../browse/view-handlers/ExplodableViewHandler';
 import ViewHelper from '../browse/view-handlers/ViewHelper';
 import Model, { ModelType } from '../../model';
 import { type TrackView } from '../browse/view-handlers/TrackViewHandler';
@@ -33,7 +33,7 @@ export default class PlayController {
    * - bandcamp/article@articleUrl={articleUrl}@mediaItemRef={...}@track={trackPosition}@artistUrl={...}@albumUrl={...}
    * - bandcamp/album@albumUrl={...}@[track | trackId]={...}@artistUrl={...}@albumUrl={...}
    */
-  async clearAddPlayTrack(track: ExplodedTrackInfo) {
+  async clearAddPlayTrack(track: QueueItem) {
     bandcamp.getLogger().info(`[bandcamp-play] clearAddPlayTrack: ${track.uri}`);
 
     this.#prefetchPlaybackStateFixer?.notifyPrefetchCleared();
@@ -91,7 +91,7 @@ export default class PlayController {
     this.#prefetchPlaybackStateFixer = null;
   }
 
-  async prefetch(track: ExplodedTrackInfo) {
+  async prefetch(track: QueueItem) {
     const prefetchEnabled = bandcamp.getConfigValue('prefetch', true);
     if (!prefetchEnabled) {
       /**
@@ -130,7 +130,7 @@ export default class PlayController {
     return res;
   }
 
-  async #getStreamUrl(track: ExplodedTrackInfo, isPrefetching = false): Promise<string> {
+  async #getStreamUrl(track: QueueItem, isPrefetching = false): Promise<string> {
     let streamUrl = await this.#doGetStreamUrl(track, isPrefetching);
 
     // Ensure stream URL is valid
@@ -162,7 +162,7 @@ export default class PlayController {
     return streamUrl;
   }
 
-  async #doGetStreamUrl(track: ExplodedTrackInfo, isPrefetching = false): Promise<string> {
+  async #doGetStreamUrl(track: QueueItem, isPrefetching = false): Promise<string> {
 
     const _toast = (type: 'error' | 'warning', msg: string) => {
       if (!isPrefetching) {
@@ -280,7 +280,7 @@ export default class PlayController {
   }
 
   // Returns kew promise!
-  #doPlay(streamUrl: string, track: ExplodedTrackInfo) {
+  #doPlay(streamUrl: string, track: QueueItem) {
     const mpdPlugin = this.#mpdPlugin;
 
     return mpdPlugin.sendMpdCommand('stop', [])
@@ -298,7 +298,7 @@ export default class PlayController {
   }
 
   // Returns kew promise!
-  #mpdAddTags(mpdAddIdResponse: { Id: string }, track: ExplodedTrackInfo) {
+  #mpdAddTags(mpdAddIdResponse: { Id: string }, track: QueueItem) {
     const songId = mpdAddIdResponse?.Id;
     if (songId !== undefined) {
       const cmds = [];
@@ -342,7 +342,7 @@ export default class PlayController {
 class PrefetchPlaybackStateFixer extends EventEmitter {
 
   #positionAtPrefetch: number;
-  #prefetchedTrack: ExplodedTrackInfo | null;
+  #prefetchedTrack: QueueItem | null;
   #volumioPushStateListener: ((state: any) => void) | null;
 
   constructor() {
@@ -357,7 +357,7 @@ class PrefetchPlaybackStateFixer extends EventEmitter {
     this.removeAllListeners();
   }
 
-  notifyPrefetched(track: ExplodedTrackInfo) {
+  notifyPrefetched(track: QueueItem) {
     this.#positionAtPrefetch = bandcamp.getStateMachine().currentPosition;
     this.#prefetchedTrack = track;
     this.#addPushStateListener();
@@ -411,12 +411,12 @@ class PrefetchPlaybackStateFixer extends EventEmitter {
     }
   }
 
-  emit(event: 'playPrefetch', info: { track: ExplodedTrackInfo; position: number; }): boolean;
+  emit(event: 'playPrefetch', info: { track: QueueItem; position: number; }): boolean;
   emit(event: string | symbol, ...args: any[]): boolean {
     return super.emit(event, ...args);
   }
 
-  on(event: 'playPrefetch', listener: (info: { track: ExplodedTrackInfo; position: number; }) => void): this;
+  on(event: 'playPrefetch', listener: (info: { track: QueueItem; position: number; }) => void): this;
   on(event: string | symbol, listener: (...args: any[]) => void): this {
     super.on(event, listener);
     return this;

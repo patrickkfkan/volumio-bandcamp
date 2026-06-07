@@ -5,7 +5,7 @@ import type TrackEntity from '../../../entities/TrackEntity';
 import { type TrackView } from './TrackViewHandler';
 import ViewHelper from './ViewHelper';
 
-export interface ExplodedTrackInfo {
+export interface QueueItem {
   service: 'bandcamp';
   uri: string;
   albumart?: string;
@@ -19,7 +19,7 @@ export interface ExplodedTrackInfo {
 
 export default abstract class ExplodableViewHandler<V extends View, E extends TrackEntity = TrackEntity> extends BaseViewHandler<V> {
 
-  async explode(): Promise<ExplodedTrackInfo[]> {
+  async explode(): Promise<QueueItem[]> {
     const view = this.currentView;
     if (view.noExplode) {
       return [];
@@ -32,10 +32,10 @@ export default abstract class ExplodableViewHandler<V extends View, E extends Tr
     }
 
     const trackInfoPromises = tracks.map((track) => this.parseTrackForExplode(track));
-    return (await Promise.all(trackInfoPromises)).filter((song) => song) as ExplodedTrackInfo[];
+    return (await Promise.all(trackInfoPromises)).filter((song) => song) as QueueItem[];
   }
 
-  protected parseTrackForExplode(track: E): Promise<ExplodedTrackInfo | null> {
+  protected parseTrackForExplode(track: E): Promise<QueueItem | null> {
     const trackUri = this.getTrackUri(track);
     if (!trackUri) {
       return Promise.resolve(null);

@@ -9,7 +9,7 @@ import bandcamp from './lib/BandcampContext';
 import BrowseController from './lib/controller/browse';
 import SearchController, { type SearchQuery } from './lib/controller/search/SearchController';
 import PlayController from './lib/controller/play/PlayController';
-import { type ExplodedTrackInfo } from './lib/controller/browse/view-handlers/ExplodableViewHandler';
+import { type QueueItem } from './lib/controller/browse/view-handlers/ExplodableViewHandler';
 import { jsPromiseToKew } from './lib/util';
 import { type RenderedPage } from './lib/controller/browse/view-handlers/ViewHandler';
 import ViewHelper from './lib/controller/browse/view-handlers/ViewHelper';
@@ -20,7 +20,7 @@ import { type ShowView } from './lib/controller/browse/view-handlers/ShowViewHan
 import { type ArticleView } from './lib/controller/browse/view-handlers/ArticleViewHandler';
 import Model from './lib/model';
 
-interface GotoParams extends ExplodedTrackInfo {
+interface GotoParams extends QueueItem {
   type: 'album' | 'artist';
 }
 
