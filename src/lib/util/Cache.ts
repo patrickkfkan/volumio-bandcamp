@@ -67,12 +67,12 @@ export default class Cache {
   }
 
   async getOrSet<T>(key: string, promiseCallback: () => Promise<T>): Promise<T> {
-    const cachedValue = this.get<T>(key);
+    const cachedValue = this.get<Promise<T>>(key);
     if (cachedValue !== undefined) {
       return cachedValue;
     }
-    const value = await promiseCallback();
-    this.put<T>(key, value);
+    const value = promiseCallback();
+    this.put<Promise<T>>(key, value);
     return value;
   }
 }
