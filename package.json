@@ -34,6 +34,7 @@
 		"volumio": ">=0"
 	},
 	"devDependencies": {
+		"@eslint/js": "^10.0.1",
 		"@types/fs-extra": "^8.1.2",
 		"@types/md5": "^2.3.2",
 		"@types/node": "^20.5.1",
