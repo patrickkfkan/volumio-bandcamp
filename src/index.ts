@@ -18,7 +18,7 @@ import type View from './lib/controller/browse/view-handlers/View';
 import { type BandView } from './lib/controller/browse/view-handlers/BandViewHandler';
 import { type ShowView } from './lib/controller/browse/view-handlers/ShowViewHandler';
 import { type ArticleView } from './lib/controller/browse/view-handlers/ArticleViewHandler';
-import Model from './lib/model';
+import Model, { ModelType } from './lib/model';
 
 interface GotoParams extends QueueItem {
   type: 'album' | 'artist';
@@ -307,7 +307,7 @@ class ControllerBandcamp {
   }
 
   goto(data: GotoParams) {
-    return jsPromiseToKew(((): Promise<RenderedPage> => {
+    return jsPromiseToKew((async (): Promise<RenderedPage> => {
       if (!this.#browseController) {
         throw Error('Bandcamp Discover plugin is not started');
       }
@@ -317,7 +317,7 @@ class ControllerBandcamp {
         if (!trackView) {
           return this.#browseController.browseUri('bandcamp');
         }
-        let gotoView: View | null;
+        let gotoView: View | null = null;
         if (data.type === 'album' && trackView.albumUrl) {
           gotoView = {
             name: 'album',
@@ -342,15 +342,28 @@ class ControllerBandcamp {
             articleUrl: trackView.articleUrl
           } as ArticleView;
         }
-        else {
-          gotoView = null;
+        else if (trackView.trackUrl) {
+          const model = Model.getInstance(ModelType.Track);
+          const trackInfo = await model.getTrack(trackView.trackUrl);
+          if (data.type === 'artist' && trackInfo.artist?.url) {
+            gotoView = {
+              name: 'band',
+              bandUrl: trackInfo.artist.url
+            };
+          }
+          else if (data.type === 'album' && trackInfo.album?.url) {
+            gotoView = {
+              name: 'album',
+              albumUrl: trackInfo.album.url
+            };
+          }
         }
 
         if (gotoView) {
-          return this.#browseController.browseUri(`bandcamp/${ViewHelper.constructUriSegmentFromView(gotoView)}`);
+          return await this.#browseController.browseUri(`bandcamp/${ViewHelper.constructUriSegmentFromView(gotoView)}`);
         }
 
-        return this.#browseController.browseUri('bandcamp');
+        return await this.#browseController.browseUri('bandcamp');
 
       }
       catch (error: any) {
