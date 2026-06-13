@@ -25,8 +25,10 @@ export interface UriEmbeddedQueueItem {
   albumart?: string;
 }
 
-export default abstract class ExplodableViewHandler<V extends View, E extends TrackEntity = TrackEntity> extends BaseViewHandler<V> {
-
+export default abstract class ExplodableViewHandler<
+  V extends View,
+  E extends TrackEntity = TrackEntity
+> extends BaseViewHandler<V> {
   async explode(): Promise<QueueItem[]> {
     const view = this.currentView;
     if (view.noExplode) {
@@ -35,25 +37,31 @@ export default abstract class ExplodableViewHandler<V extends View, E extends Tr
 
     if (view.explode) {
       const qi = view.explode;
-      return [{
-        service: 'bandcamp',
-        uri: ViewHelper.setUriEmbeddedQueueItem(qi.uri, qi),
-        albumart: qi.albumart,
-        artist: qi.artist,
-        album: qi.album,
-        name: qi.title,
-        title: qi.title
-      }];
+      return [
+        {
+          service: 'bandcamp',
+          uri: ViewHelper.setUriEmbeddedQueueItem(qi.uri, qi),
+          albumart: qi.albumart,
+          artist: qi.artist,
+          album: qi.album,
+          name: qi.title,
+          title: qi.title
+        }
+      ];
     }
 
     const tracks = await this.getTracksOnExplode();
     if (!Array.isArray(tracks)) {
       const trackInfo = await this.parseTrackForExplode(tracks);
-      return trackInfo ? [ trackInfo ] : [];
+      return trackInfo ? [trackInfo] : [];
     }
 
-    const trackInfoPromises = tracks.map((track) => this.parseTrackForExplode(track));
-    return (await Promise.all(trackInfoPromises)).filter((song) => song) as QueueItem[];
+    const trackInfoPromises = tracks.map((track) =>
+      this.parseTrackForExplode(track)
+    );
+    return (await Promise.all(trackInfoPromises)).filter(
+      (song) => song
+    ) as QueueItem[];
   }
 
   protected parseTrackForExplode(track: E): Promise<QueueItem | null> {
@@ -61,7 +69,8 @@ export default abstract class ExplodableViewHandler<V extends View, E extends Tr
     if (!trackUri) {
       return Promise.resolve(null);
     }
-    const trackName = track.streamUrl ? track.name : UIHelper.addNonPlayableText(track.name);
+    const trackName =
+      track.streamUrl ? track.name : UIHelper.addNonPlayableText(track.name);
     return Promise.resolve({
       service: 'bandcamp',
       uri: trackUri,
@@ -86,7 +95,7 @@ export default abstract class ExplodableViewHandler<V extends View, E extends Tr
     if (!listItemUri) {
       return null;
     }
-    // We expect an 'explode' param in listItemUri. That would be the 
+    // We expect an 'explode' param in listItemUri. That would be the
     // URI of the queue item.
     const trackView = ViewHelper.getViewsFromUri(listItemUri).pop();
     if (trackView?.name !== 'track' || !trackView.explode) {

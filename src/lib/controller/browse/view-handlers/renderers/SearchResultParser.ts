@@ -6,10 +6,13 @@ import type View from '../View';
 import ViewHelper from '../ViewHelper';
 import BaseRenderer, { type RenderedListItem } from './BaseRenderer';
 
-type SearchResultEntity = ArtistEntity | LabelEntity | AlbumEntity | TrackEntity;
+type SearchResultEntity =
+  | ArtistEntity
+  | LabelEntity
+  | AlbumEntity
+  | TrackEntity;
 
 export default class SearchResultRenderer extends BaseRenderer<SearchResultEntity> {
-
   renderToListItem(data: SearchResultEntity): RenderedListItem | null {
     if (!data.url) {
       return null;

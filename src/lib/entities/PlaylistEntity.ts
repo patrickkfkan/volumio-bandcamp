@@ -8,4 +8,4 @@ export interface PlaylistListItemEntity extends PlaylistListItem {
 export interface PlaylistEntity extends Omit<Playlist, 'tracks'> {
   type: 'playlist';
   tracks: TrackEntity[];
-};
+}

@@ -1,4 +1,11 @@
-import bcfetch, { type PlaylistAPIGetPlaylistParams, type PlaylistListContinuation, type Playlist, type PlaylistAPIListParams, type PlaylistList, type PlaylistListItem } from 'bandcamp-fetch';
+import bcfetch, {
+  type PlaylistAPIGetPlaylistParams,
+  type PlaylistListContinuation,
+  type Playlist,
+  type PlaylistAPIListParams,
+  type PlaylistList,
+  type PlaylistListItem
+} from 'bandcamp-fetch';
 import bandcamp from '../BandcampContext';
 import BaseModel, { type LoopFetchCallbackParams } from './BaseModel';
 import EntityConverter from '../util/EntityConverter';
@@ -15,14 +22,16 @@ interface GetPlaylistsLoopFetchCallbackParams extends LoopFetchCallbackParams {
 }
 
 export default class PlaylistModel extends BaseModel {
-
   getPlaylistCount(fanId: number) {
-    return bandcamp.getCache().getOrSet(
-      this.getCacheKeyForFetch('playlistCount', { fanId }),
-      async () => {
-        const list = await bcfetch.limiter.playlist.list({ fanId });
-        return list.total;
-      });
+    return bandcamp
+      .getCache()
+      .getOrSet(
+        this.getCacheKeyForFetch('playlistCount', { fanId }),
+        async () => {
+          const list = await bcfetch.limiter.playlist.list({ fanId });
+          return list.total;
+        }
+      );
   }
 
   getPlaylists(params: PlaylistModelGetPlaylistsParams) {
@@ -30,7 +39,8 @@ export default class PlaylistModel extends BaseModel {
       callbackParams: { ...params },
       getFetchPromise: this.#getPlaylistsFetchPromise.bind(this),
       getItemsFromFetchResult: this.#getPlaylistsFromFetchResult.bind(this),
-      getNextPageTokenFromFetchResult: this.#getNextPageTokenFromPlaylistsFetchResult.bind(this),
+      getNextPageTokenFromFetchResult:
+        this.#getNextPageTokenFromPlaylistsFetchResult.bind(this),
       convertToEntity: this.#convertFetchedPlaylistListItemToEntity.bind(this),
       pageOffset: params.pageOffset,
       pageToken: params.pageToken,
@@ -44,31 +54,42 @@ export default class PlaylistModel extends BaseModel {
       const parsedPageToken = JSON.parse(params.pageToken);
       continuation = parsedPageToken?.continuation || undefined;
     }
-    const queryParams: PlaylistAPIListParams = continuation ? {
-      continuation,
-      imageFormat: this.getAlbumImageFormat()
-    } : {
-      fanId: params.fanId,
-      imageFormat: this.getAlbumImageFormat()
-    };
+    const queryParams: PlaylistAPIListParams =
+      continuation ?
+        {
+          continuation,
+          imageFormat: this.getAlbumImageFormat()
+        }
+      : {
+          fanId: params.fanId,
+          imageFormat: this.getAlbumImageFormat()
+        };
 
-    return bandcamp.getCache().getOrSet(
-      this.getCacheKeyForFetch('playlists', queryParams),
-      () => bcfetch.limiter.playlist.list(queryParams));
+    return bandcamp
+      .getCache()
+      .getOrSet(this.getCacheKeyForFetch('playlists', queryParams), () =>
+        bcfetch.limiter.playlist.list(queryParams)
+      );
   }
 
   #getPlaylistsFromFetchResult(result: PlaylistList) {
     return result.items.slice(0);
   }
 
-  #getNextPageTokenFromPlaylistsFetchResult(result: PlaylistList, params: GetPlaylistsLoopFetchCallbackParams) {
+  #getNextPageTokenFromPlaylistsFetchResult(
+    result: PlaylistList,
+    params: GetPlaylistsLoopFetchCallbackParams
+  ) {
     const continuation = result.continuation;
     let indexRef = 0;
     if (params.pageToken) {
       const parsedPageToken = JSON.parse(params.pageToken);
       indexRef = parsedPageToken?.indexRef || 0;
     }
-    if (result.items.length > 0 && result.total > indexRef + result.items.length) {
+    if (
+      result.items.length > 0 &&
+      result.total > indexRef + result.items.length
+    ) {
       const nextPageToken = {
         continuation,
         indexRef: indexRef + result.items.length
@@ -90,18 +111,18 @@ export default class PlaylistModel extends BaseModel {
       playlistImageFormat: this.getAlbumImageFormat(),
       curatorImageFormat: this.getArtistImageFormat()
     };
-    const playlist = await bandcamp.getCache().getOrSet(
-      this.getCacheKeyForFetch('playlist', queryParams),
-      async () => {
-        const pl = await bcfetch.limiter.playlist.getPlaylist(queryParams)
+    const playlist = await bandcamp
+      .getCache()
+      .getOrSet(this.getCacheKeyForFetch('playlist', queryParams), async () => {
+        const pl = await bcfetch.limiter.playlist.getPlaylist(queryParams);
         if (pl.additionalTrackIds.length > 0) {
-          const additionalTracks = await bcfetch.limiter.playlist.getAdditionalTracks({ playlist: pl });
+          const additionalTracks =
+            await bcfetch.limiter.playlist.getAdditionalTracks({
+              playlist: pl
+            });
           return {
             ...pl,
-            tracks: [
-              ...pl.tracks,
-              ...additionalTracks
-            ]
+            tracks: [...pl.tracks, ...additionalTracks]
           };
         }
         return pl;
@@ -111,9 +132,11 @@ export default class PlaylistModel extends BaseModel {
   }
 
   getPlaylistCategories() {
-    return bandcamp.getCache().getOrSet(
-      this.getCacheKeyForFetch('articleCategories'),
-      () => bcfetch.limiter.article.getCategories());
+    return bandcamp
+      .getCache()
+      .getOrSet(this.getCacheKeyForFetch('articleCategories'), () =>
+        bcfetch.limiter.article.getCategories()
+      );
   }
 
   #convertFetchedPlaylistToEntity(item: Playlist) {

@@ -15,7 +15,6 @@ export interface TagView extends View {
 }
 
 export default class TagViewHandler extends BaseViewHandler<TagView> {
-
   async browse(): Promise<RenderedPage> {
     return this.#browseTags();
   }
@@ -23,7 +22,12 @@ export default class TagViewHandler extends BaseViewHandler<TagView> {
   async #browseTags(): Promise<RenderedPage> {
     const tags = await this.getModel(ModelType.Tag).getTags();
     const lists = [
-      this.#getTagsList(tags, 'tags', bandcamp.getI18n('BANDCAMP_TAGS'), 'fa fa-tag'),
+      this.#getTagsList(
+        tags,
+        'tags',
+        bandcamp.getI18n('BANDCAMP_TAGS'),
+        'fa fa-tag'
+      )
     ];
 
     return {
@@ -34,7 +38,12 @@ export default class TagViewHandler extends BaseViewHandler<TagView> {
     };
   }
 
-  #getTagsList(tags: Record<string, TagEntity[]>, key: string, title: string, icon: string): RenderedList {
+  #getTagsList(
+    tags: Record<string, TagEntity[]>,
+    key: string,
+    title: string,
+    icon: string
+  ): RenderedList {
     const tagRenderer = this.getRenderer(RendererType.Tag);
     const listItems = tags[key].reduce<RenderedListItem[]>((result, tag) => {
       const rendered = tagRenderer.renderToListItem(tag);
@@ -46,7 +55,7 @@ export default class TagViewHandler extends BaseViewHandler<TagView> {
 
     return {
       title: UIHelper.addIconToListTitle(icon, title),
-      availableListViews: [ 'list' ],
+      availableListViews: ['list'],
       items: listItems
     };
   }

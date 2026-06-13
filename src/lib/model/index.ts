@@ -38,7 +38,6 @@ const MODEL_TYPE_TO_CLASS: Record<any, any> = {
 };
 
 export default class Model {
-
   static #logger: Logger;
 
   static {
@@ -46,7 +45,8 @@ export default class Model {
     this.#logger = {
       info: (msg) => bandcamp.getLogger().info(`[bandcamp] (bcfetch) ${msg}`),
       warn: (msg) => bandcamp.getLogger().warn(`[bandcamp] (bcfetch) ${msg}`),
-      debug: (msg) => bandcamp.getLogger().verbose(`[bandcamp] (bcfetch) ${msg}`),
+      debug: (msg) =>
+        bandcamp.getLogger().verbose(`[bandcamp] (bcfetch) ${msg}`),
       error: (msg) => bandcamp.getLogger().error(`[bandcamp] (bcfetch) ${msg}`)
     };
   }
@@ -79,8 +79,7 @@ export default class Model {
   static setLogDebugMessages(value: boolean) {
     if (value) {
       bcfetch.setLogger(this.#logger);
-    }
-    else {
+    } else {
       bcfetch.setLogger(null);
     }
   }

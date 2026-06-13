@@ -66,7 +66,10 @@ export default class Cache {
     return (this.#cache.getStats().vsize + this.#cache.getStats().ksize) / 1000;
   }
 
-  async getOrSet<T>(key: string, promiseCallback: () => Promise<T>): Promise<T> {
+  async getOrSet<T>(
+    key: string,
+    promiseCallback: () => Promise<T>
+  ): Promise<T> {
     const cachedValue = this.get<Promise<T>>(key);
     if (cachedValue !== undefined) {
       return cachedValue;

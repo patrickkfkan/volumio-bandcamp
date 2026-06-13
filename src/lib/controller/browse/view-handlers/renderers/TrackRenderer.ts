@@ -1,4 +1,7 @@
-import BaseRenderer, { type RenderedHeader, type RenderedListItem } from './BaseRenderer';
+import BaseRenderer, {
+  type RenderedHeader,
+  type RenderedListItem
+} from './BaseRenderer';
 import UIHelper from '../../../../util/UIHelper';
 import type TrackEntity from '../../../../entities/TrackEntity';
 import { type TrackView } from '../TrackViewHandler';
@@ -11,9 +14,15 @@ export interface TrackRenderOptions {
 }
 
 export default class TrackRenderer extends BaseRenderer<TrackEntity> {
-
-  renderToListItem(data: TrackEntity, opts?: TrackRenderOptions): RenderedListItem | null {
-    const { addType = false, fakeAlbum = false, addNonPlayableText = true } = opts || {};
+  renderToListItem(
+    data: TrackEntity,
+    opts?: TrackRenderOptions
+  ): RenderedListItem | null {
+    const {
+      addType = false,
+      fakeAlbum = false,
+      addNonPlayableText = true
+    } = opts || {};
     if (!data.url) {
       return null;
     }
@@ -38,17 +47,17 @@ export default class TrackRenderer extends BaseRenderer<TrackEntity> {
             name: 'track',
             trackUrl: data.url,
             albumUrl: data.album?.url,
-            artistUrl: data.artist?.url,
-          } satisfies TrackView]
-        )
+            artistUrl: data.artist?.url
+          } satisfies TrackView
+        ])
       }
     };
-    
+
     const result: RenderedListItem = {
       service: 'bandcamp',
       type: fakeAlbum ? 'folder' : 'song',
       ...common,
-      uri: `${this.uri}/${ViewHelper.constructUriSegmentFromView(trackView)}`,
+      uri: `${this.uri}/${ViewHelper.constructUriSegmentFromView(trackView)}`
     };
 
     if (!fakeAlbum) {

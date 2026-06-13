@@ -1,13 +1,20 @@
-import BaseRenderer, { type RenderedHeader, type RenderedListItem } from './BaseRenderer';
-import type { PlaylistEntity, PlaylistListItemEntity } from '../../../../entities/PlaylistEntity';
+import BaseRenderer, {
+  type RenderedHeader,
+  type RenderedListItem
+} from './BaseRenderer';
+import type {
+  PlaylistEntity,
+  PlaylistListItemEntity
+} from '../../../../entities/PlaylistEntity';
 import ViewHelper from '../ViewHelper';
 import bandcamp from '../../../../BandcampContext';
 import { type PlaylistView } from '../PlaylistViewHandler';
 
 const DEFAULT_ICON = '/albumart?sourceicon=music_service/mpd/playlisticon.png';
 
-export default class PlaylistRenderer extends BaseRenderer<PlaylistListItemEntity | PlaylistEntity> {
-
+export default class PlaylistRenderer extends BaseRenderer<
+  PlaylistListItemEntity | PlaylistEntity
+> {
   renderToListItem(data: PlaylistListItemEntity): RenderedListItem | null {
     if (!data.url) {
       return null;
@@ -41,10 +48,10 @@ export default class PlaylistRenderer extends BaseRenderer<PlaylistListItemEntit
     };
   }
 
-  #getSummary(data: { numTracks: number, duration: number}) {
+  #getSummary(data: { numTracks: number; duration: number }) {
     const duration = this.#durationFormat(data.duration);
     return duration ?
-      bandcamp.getI18n('BANDCAMP_N_TRACKS_DURATION', data.numTracks, duration)
+        bandcamp.getI18n('BANDCAMP_N_TRACKS_DURATION', data.numTracks, duration)
       : bandcamp.getI18n('BANDCAMP_N_TRACKS', data.numTracks);
   }
 

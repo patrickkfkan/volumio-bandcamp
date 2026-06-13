@@ -1,4 +1,4 @@
-import { type UriEmbeddedQueueItem } from "./ExplodableViewHandler";
+import { type UriEmbeddedQueueItem } from './ExplodableViewHandler';
 
 interface View extends Record<string, any> {
   name: string;

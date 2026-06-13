@@ -12,16 +12,16 @@ import type TagModel from '../../../model/TagModel';
 import type TrackModel from '../../../model/TrackModel';
 import UIHelper from '../../../util/UIHelper';
 import { type QueueItem } from './ExplodableViewHandler';
-import {type PageRef} from './View';
+import { type PageRef } from './View';
 import type View from './View';
-import {type RenderedPage} from './ViewHandler';
+import { type RenderedPage } from './ViewHandler';
 import type ViewHandler from './ViewHandler';
 import ViewHelper from './ViewHelper';
 import Renderer, { RendererType } from './renderers';
 import type AlbumRenderer from './renderers/AlbumRenderer';
 import type ArticleRenderer from './renderers/ArticleRenderer';
 import type BandRenderer from './renderers/BandRenderer';
-import {type RenderedListItem} from './renderers/BaseRenderer';
+import { type RenderedListItem } from './renderers/BaseRenderer';
 import type BaseRenderer from './renderers/BaseRenderer';
 import type PlaylistRenderer from './renderers/PlaylistRenderer';
 import type SearchResultRenderer from './renderers/SearchResultParser';
@@ -30,7 +30,6 @@ import type TagRenderer from './renderers/TagRenderer';
 import type TrackRenderer from './renderers/TrackRenderer';
 
 export default class BaseViewHandler<V extends View> implements ViewHandler {
-
   #uri: string;
   #currentView: V;
   #previousViews: View[];
@@ -131,36 +130,68 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
       let renderer;
       switch (type) {
         case RendererType.Album:
-          renderer = Renderer.getInstance(RendererType.Album, this.#uri,
-            this.#currentView, this.#previousViews);
+          renderer = Renderer.getInstance(
+            RendererType.Album,
+            this.#uri,
+            this.#currentView,
+            this.#previousViews
+          );
           break;
         case RendererType.Band:
-          renderer = Renderer.getInstance(RendererType.Band, this.#uri,
-            this.#currentView, this.#previousViews);
+          renderer = Renderer.getInstance(
+            RendererType.Band,
+            this.#uri,
+            this.#currentView,
+            this.#previousViews
+          );
           break;
         case RendererType.Article:
-          renderer = Renderer.getInstance(RendererType.Article, this.#uri,
-            this.#currentView, this.#previousViews);
+          renderer = Renderer.getInstance(
+            RendererType.Article,
+            this.#uri,
+            this.#currentView,
+            this.#previousViews
+          );
           break;
         case RendererType.SearchResult:
-          renderer = Renderer.getInstance(RendererType.SearchResult, this.#uri,
-            this.#currentView, this.#previousViews);
+          renderer = Renderer.getInstance(
+            RendererType.SearchResult,
+            this.#uri,
+            this.#currentView,
+            this.#previousViews
+          );
           break;
         case RendererType.Show:
-          renderer = Renderer.getInstance(RendererType.Show, this.#uri,
-            this.#currentView, this.#previousViews);
+          renderer = Renderer.getInstance(
+            RendererType.Show,
+            this.#uri,
+            this.#currentView,
+            this.#previousViews
+          );
           break;
         case RendererType.Tag:
-          renderer = Renderer.getInstance(RendererType.Tag, this.#uri,
-            this.#currentView, this.#previousViews);
+          renderer = Renderer.getInstance(
+            RendererType.Tag,
+            this.#uri,
+            this.#currentView,
+            this.#previousViews
+          );
           break;
         case RendererType.Track:
-          renderer = Renderer.getInstance(RendererType.Track, this.#uri,
-            this.#currentView, this.#previousViews);
+          renderer = Renderer.getInstance(
+            RendererType.Track,
+            this.#uri,
+            this.#currentView,
+            this.#previousViews
+          );
           break;
         case RendererType.Playlist:
-          renderer = Renderer.getInstance(RendererType.Playlist, this.#uri,
-            this.#currentView, this.#previousViews);
+          renderer = Renderer.getInstance(
+            RendererType.Playlist,
+            this.#uri,
+            this.#currentView,
+            this.#previousViews
+          );
           break;
         default:
           throw Error(`Unknown renderer type: ${String(type)}`);
@@ -171,7 +202,9 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
   }
 
   constructPrevUri(): string {
-    const segments = this.#previousViews.map(((view) => ViewHelper.constructUriSegmentFromView(view)));
+    const segments = this.#previousViews.map((view) =>
+      ViewHelper.constructUriSegmentFromView(view)
+    );
 
     const currentView = this.#currentView;
     if (currentView.pageRef) {
@@ -180,7 +213,7 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
       delete newView.prevPageRefs;
 
       if (currentView.prevPageRefs) {
-        const prevPageRefs = [ ...currentView.prevPageRefs ];
+        const prevPageRefs = [...currentView.prevPageRefs];
         const prevPageRef = prevPageRefs.pop();
         if (prevPageRef && prevPageRefs.length > 0) {
           newView.prevPageRefs = prevPageRefs;
@@ -197,13 +230,14 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
   }
 
   constructNextUri(nextPageRef: PageRef): string {
-    const segments = this.#previousViews.map(((view) => ViewHelper.constructUriSegmentFromView(view)));
+    const segments = this.#previousViews.map((view) =>
+      ViewHelper.constructUriSegmentFromView(view)
+    );
 
     const newView = { ...this.#currentView };
     if (this.#currentView.prevPageRefs) {
-      newView.prevPageRefs = [ ...this.#currentView.prevPageRefs ];
-    }
-    else {
+      newView.prevPageRefs = [...this.#currentView.prevPageRefs];
+    } else {
       newView.prevPageRefs = [];
     }
     if (newView.pageRef) {
@@ -229,7 +263,10 @@ export default class BaseViewHandler<V extends View> implements ViewHandler {
     };
   }
 
-  constructPageRef(pageToken?: string | null, pageOffset?: number): PageRef | null {
+  constructPageRef(
+    pageToken?: string | null,
+    pageOffset?: number
+  ): PageRef | null {
     if (!pageToken && !pageOffset) {
       return null;
     }

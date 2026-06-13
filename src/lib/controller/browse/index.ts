@@ -6,7 +6,6 @@ import { type RenderedPage } from './view-handlers/ViewHandler';
 import ViewHandlerFactory from './view-handlers/ViewHandlerFactory';
 
 export default class BrowseController {
-
   /*
    *  Uri follows a hierarchical view structure, starting with 'bandcamp'.
    * - If nothing follows 'bandcamp', the view would be 'root'.

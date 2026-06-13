@@ -31,16 +31,60 @@ const RENDERER_TYPE_TO_CLASS: Record<any, any> = {
 };
 
 export default class Renderer {
-
-  static getInstance(type: RendererType.Album, uri: string, currentView: View, previousViews: View[]): AlbumRenderer;
-  static getInstance(type: RendererType.Article, uri: string, currentView: View, previousViews: View[]): ArticleRenderer;
-  static getInstance(type: RendererType.Band, uri: string, currentView: View, previousViews: View[]): BandRenderer;
-  static getInstance(type: RendererType.SearchResult, uri: string, currentView: View, previousViews: View[]): SearchResultRenderer;
-  static getInstance(type: RendererType.Show, uri: string, currentView: View, previousViews: View[]): ShowRenderer;
-  static getInstance(type: RendererType.Tag, uri: string, currentView: View, previousViews: View[]): TagRenderer;
-  static getInstance(type: RendererType.Track, uri: string, currentView: View, previousViews: View[]): TrackRenderer;
-  static getInstance(type: RendererType.Playlist, uri: string, currentView: View, previousViews: View[]): PlaylistRenderer;
-  static getInstance(type: RendererType, uri: string, currentView: View, previousViews: View[]) {
+  static getInstance(
+    type: RendererType.Album,
+    uri: string,
+    currentView: View,
+    previousViews: View[]
+  ): AlbumRenderer;
+  static getInstance(
+    type: RendererType.Article,
+    uri: string,
+    currentView: View,
+    previousViews: View[]
+  ): ArticleRenderer;
+  static getInstance(
+    type: RendererType.Band,
+    uri: string,
+    currentView: View,
+    previousViews: View[]
+  ): BandRenderer;
+  static getInstance(
+    type: RendererType.SearchResult,
+    uri: string,
+    currentView: View,
+    previousViews: View[]
+  ): SearchResultRenderer;
+  static getInstance(
+    type: RendererType.Show,
+    uri: string,
+    currentView: View,
+    previousViews: View[]
+  ): ShowRenderer;
+  static getInstance(
+    type: RendererType.Tag,
+    uri: string,
+    currentView: View,
+    previousViews: View[]
+  ): TagRenderer;
+  static getInstance(
+    type: RendererType.Track,
+    uri: string,
+    currentView: View,
+    previousViews: View[]
+  ): TrackRenderer;
+  static getInstance(
+    type: RendererType.Playlist,
+    uri: string,
+    currentView: View,
+    previousViews: View[]
+  ): PlaylistRenderer;
+  static getInstance(
+    type: RendererType,
+    uri: string,
+    currentView: View,
+    previousViews: View[]
+  ) {
     if (RENDERER_TYPE_TO_CLASS[type]) {
       return new RENDERER_TYPE_TO_CLASS[type](uri, currentView, previousViews);
     }
