@@ -43,7 +43,7 @@ export default abstract class BaseRenderer<T> {
   abstract renderToListItem(data: T, ...args: any[]): RenderedListItem | null;
 
    
-  renderToHeader(data: T): RenderedHeader | null {
+  renderToHeader(_data: T): RenderedHeader | null {
     return null;
   }
 

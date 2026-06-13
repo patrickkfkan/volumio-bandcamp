@@ -64,7 +64,7 @@ class BandcampContext {
         try {
           return JSON.parse(val);
         }
-        catch (e) {
+        catch (_) {
           return defaultValue;
         }
       }
@@ -153,7 +153,7 @@ class BandcampContext {
       try {
         this.#i18nDefaults = fs.readJsonSync(`${i18nPath}/strings_en.json`);
       }
-      catch (e) {
+      catch (_) {
         this.#i18nDefaults = {};
       }
 
@@ -161,7 +161,7 @@ class BandcampContext {
         const language_code = this.#pluginContext.coreCommand.sharedVars.get('language_code');
         this.#i18n = fs.readJsonSync(`${i18nPath}/strings_${language_code}.json`);
       }
-      catch (e) {
+      catch (_) {
         this.#i18n = this.#i18nDefaults;
       }
     }

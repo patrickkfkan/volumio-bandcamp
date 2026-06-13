@@ -2,7 +2,6 @@ import BaseViewHandler from './BaseViewHandler';
 import type View from './View';
 import UIHelper from '../../../util/UIHelper';
 import type TrackEntity from '../../../entities/TrackEntity';
-import { type TrackView } from './TrackViewHandler';
 import ViewHelper from './ViewHelper';
 import { RendererType } from './renderers';
 

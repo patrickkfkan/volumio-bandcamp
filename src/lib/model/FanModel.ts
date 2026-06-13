@@ -141,7 +141,7 @@ export default class FanModel extends BaseModel {
       case 'tag': // Following genres are tags
         return EntityConverter.convertTag(item as Tag);
       default: // UserKind (following artists / labels) does not have 'tag'
-        return EntityConverter.convertBand(item as UserKind);
+        return EntityConverter.convertBand(item);
     }
   }
 }

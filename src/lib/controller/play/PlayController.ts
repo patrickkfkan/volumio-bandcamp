@@ -237,7 +237,7 @@ export default class PlayController {
         }
       }
       else {
-        matchedTrack = mediaItem as ArticleEntityMediaItem<TrackEntity>;
+        matchedTrack = mediaItem;
       }
       if (matchedTrack.streamUrl) {
         const safeUri = matchedTrack.streamUrl.replace(/"/g, '\\"');

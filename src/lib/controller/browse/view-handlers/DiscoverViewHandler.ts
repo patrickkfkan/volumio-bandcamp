@@ -319,7 +319,7 @@ export default class DiscoverViewHandler extends ExplodableViewHandler<DiscoverV
         type: 'item-no-menu',
         title,
         icon: isSelected ? 'fa fa-check' : 'fa',
-        uri: this.#constructDiscoverOptionUri(targetOption as string, undefined)
+        uri: this.#constructDiscoverOptionUri(targetOption, undefined)
       });
     }
 
@@ -335,7 +335,7 @@ export default class DiscoverViewHandler extends ExplodableViewHandler<DiscoverV
         type: 'item-no-menu',
         title,
         icon: isSelected ? 'fa fa-check' : 'fa',
-        uri: this.#constructDiscoverOptionUri(targetOption as string, undefined)
+        uri: this.#constructDiscoverOptionUri(targetOption, undefined)
       });
     }
 
@@ -398,7 +398,6 @@ export default class DiscoverViewHandler extends ExplodableViewHandler<DiscoverV
   }
 
   protected async getTracksOnExplode() {
-    const view = this.currentView;
     const modelParams: DiscoveryModelGetDiscoverResultParams = {
       discoverParams: this.#getDiscoverParamsFromUriOrDefault(),
       limit: bandcamp.getConfigValue('itemsPerPage', 47)

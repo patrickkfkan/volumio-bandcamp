@@ -3,7 +3,7 @@ import type TrackEntity from '../../../entities/TrackEntity';
 import { ModelType } from '../../../model';
 import { type ShowModelGetShowsParams } from '../../../model/ShowModel';
 import UIHelper, { type UILink } from '../../../util/UIHelper';
-import ExplodableViewHandler, { UriEmbeddedQueueItem } from './ExplodableViewHandler';
+import ExplodableViewHandler from './ExplodableViewHandler';
 import type View from './View';
 import { type RenderedList, type RenderedPage } from './ViewHandler';
 import ViewHelper from './ViewHelper';
@@ -126,7 +126,7 @@ export default class ShowViewHandler extends ExplodableViewHandler<ShowView> {
           try {
             return await trackModel.getTrack(track.url);
           }
-          catch (error: any) {
+          catch (_) {
             return null;
           }
         }
@@ -192,7 +192,7 @@ export default class ShowViewHandler extends ExplodableViewHandler<ShowView> {
           }
           return null;
         }
-        catch (error: any) {
+        catch (_) {
           return null;
         }
       });

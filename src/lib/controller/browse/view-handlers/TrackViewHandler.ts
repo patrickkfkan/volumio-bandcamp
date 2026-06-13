@@ -2,7 +2,7 @@ import bandcamp from '../../../BandcampContext';
 import { ModelType } from '../../../model';
 import UIHelper, { type UILink } from '../../../util/UIHelper';
 import { type AlbumView } from './AlbumViewHandler';
-import ExplodableViewHandler, { UriEmbeddedQueueItem } from './ExplodableViewHandler';
+import ExplodableViewHandler from './ExplodableViewHandler';
 import type View from './View';
 import { type RenderedPage } from './ViewHandler';
 import ViewHandlerFactory from './ViewHandlerFactory';

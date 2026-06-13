@@ -13,11 +13,7 @@ import { type QueueItem } from './lib/controller/browse/view-handlers/Explodable
 import { jsPromiseToKew } from './lib/util';
 import { type RenderedPage } from './lib/controller/browse/view-handlers/ViewHandler';
 import ViewHelper from './lib/controller/browse/view-handlers/ViewHelper';
-import { type AlbumView } from './lib/controller/browse/view-handlers/AlbumViewHandler';
 import type View from './lib/controller/browse/view-handlers/View';
-import { type BandView } from './lib/controller/browse/view-handlers/BandViewHandler';
-import { type ShowView } from './lib/controller/browse/view-handlers/ShowViewHandler';
-import { type ArticleView } from './lib/controller/browse/view-handlers/ArticleViewHandler';
 import Model, { ModelType } from './lib/model';
 
 interface GotoParams extends QueueItem {
@@ -322,25 +318,25 @@ class ControllerBandcamp {
           gotoView = {
             name: 'album',
             albumUrl: trackView.albumUrl
-          } as AlbumView;
+          };
         }
         else if (data.type === 'artist' && trackView.artistUrl) {
           gotoView = {
             name: 'band',
             bandUrl: trackView.artistUrl
-          } as BandView;
+          };
         }
         else if (trackView.name === 'show' && trackView.showUrl) {
           gotoView = {
             name: 'show',
             showUrl: trackView.showUrl
-          } as ShowView;
+          };
         }
         else if (trackView.name === 'article' && trackView.articleUrl) {
           gotoView = {
             name: 'article',
             articleUrl: trackView.articleUrl
-          } as ArticleView;
+          };
         }
         else if (trackView.trackUrl) {
           const model = Model.getInstance(ModelType.Track);
@@ -367,7 +363,7 @@ class ControllerBandcamp {
 
       }
       catch (error: any) {
-        throw Error(`Failed to fetch requested info: ${error.message}`);
+        throw Error(`Failed to fetch requested info: ${error.message}`, { cause: error });
       }
     })());
   }

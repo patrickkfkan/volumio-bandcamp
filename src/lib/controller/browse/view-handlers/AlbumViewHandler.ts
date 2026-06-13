@@ -1,9 +1,8 @@
 import bandcamp from '../../../BandcampContext';
-import TrackEntity from '../../../entities/TrackEntity';
 import { ModelType } from '../../../model';
 import UIHelper, { type UILink } from '../../../util/UIHelper';
 import { type BandView } from './BandViewHandler';
-import ExplodableViewHandler, { QueueItem } from './ExplodableViewHandler';
+import ExplodableViewHandler from './ExplodableViewHandler';
 import type View from './View';
 import { type RenderedList, type RenderedPage, type RenderedPageContents } from './ViewHandler';
 import ViewHelper from './ViewHelper';
