@@ -1,4 +1,4 @@
-import bcfetch, { PlaylistAPIGetPlaylistParams, PlaylistListContinuation, type Playlist, type PlaylistAPIListParams, type PlaylistList, type PlaylistListItem } from 'bandcamp-fetch';
+import bcfetch, { type PlaylistAPIGetPlaylistParams, type PlaylistListContinuation, type Playlist, type PlaylistAPIListParams, type PlaylistList, type PlaylistListItem } from 'bandcamp-fetch';
 import bandcamp from '../BandcampContext';
 import BaseModel, { type LoopFetchCallbackParams } from './BaseModel';
 import EntityConverter from '../util/EntityConverter';

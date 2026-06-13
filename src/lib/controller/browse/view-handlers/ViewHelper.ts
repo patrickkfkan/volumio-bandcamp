@@ -1,4 +1,4 @@
-import { UriEmbeddedQueueItem } from './ExplodableViewHandler';
+import { type UriEmbeddedQueueItem } from './ExplodableViewHandler';
 import type View from './View';
 
 export default class ViewHelper {

@@ -315,7 +315,7 @@ class ControllerBandcamp {
         const views = ViewHelper.getViewsFromUri(data.uri);
         const trackView = views[1];
         if (!trackView) {
-          return this.#browseController.browseUri('bandcamp');
+          return await this.#browseController.browseUri('bandcamp');
         }
         let gotoView: View | null = null;
         if (data.type === 'album' && trackView.albumUrl) {

@@ -9,7 +9,7 @@ import { type RenderedListItem } from './renderers/BaseRenderer';
 import UIHelper, { type UILink } from '../../../util/UIHelper';
 import { type FanModelGetFanItemsParams } from '../../../model/FanModel';
 import ViewHelper from './ViewHelper';
-import { PlaylistView } from './PlaylistViewHandler';
+import { type PlaylistView } from './PlaylistViewHandler';
 
 export interface FanView extends View {
   name: 'fan';

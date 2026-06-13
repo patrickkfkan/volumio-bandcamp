@@ -1,5 +1,5 @@
-import { Playlist, PlaylistListItem } from 'bandcamp-fetch';
-import TrackEntity from './TrackEntity';
+import { type Playlist, type PlaylistListItem } from 'bandcamp-fetch';
+import type TrackEntity from './TrackEntity';
 
 export interface PlaylistListItemEntity extends PlaylistListItem {
   type: 'playlist';

@@ -2,7 +2,7 @@ import BaseRenderer, { type RenderedHeader, type RenderedListItem } from './Base
 import type { PlaylistEntity, PlaylistListItemEntity } from '../../../../entities/PlaylistEntity';
 import ViewHelper from '../ViewHelper';
 import bandcamp from '../../../../BandcampContext';
-import { PlaylistView } from '../PlaylistViewHandler';
+import { type PlaylistView } from '../PlaylistViewHandler';
 
 const DEFAULT_ICON = '/albumart?sourceicon=music_service/mpd/playlisticon.png';
 

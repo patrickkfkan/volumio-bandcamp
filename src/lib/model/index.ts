@@ -1,4 +1,4 @@
-import bcfetch, { Logger } from 'bandcamp-fetch';
+import bcfetch, { type Logger } from 'bandcamp-fetch';
 import AlbumModel from './AlbumModel';
 import ArticleModel from './ArticleModel';
 import BandModel from './BandModel';

@@ -58,7 +58,7 @@ export default class PlaylistViewHandler extends ExplodableViewHandler<PlaylistV
     catch (_) {
       me = null;
     }
-    let username = view.username;
+    const username = view.username;
     const fanInfo = username ? await fanModel.getInfo(username) : null;
     const fanId = fanInfo?.fanId ?? me?.fanId;
     if (!fanId) {
