@@ -173,7 +173,12 @@ export default class BandViewHandler extends ExplodableViewHandler<BandView> {
         rendered = albumRenderer.renderToListItem(discogItem);
       }
       else { // Track
-        rendered = trackRenderer.renderToListItem(discogItem, true, true, false);
+        rendered = trackRenderer.renderToListItem(
+          discogItem, {
+            addType: true,
+            fakeAlbum: true,
+            addNonPlayableText: false
+          });
       }
       if (rendered) {
         result.push(rendered);

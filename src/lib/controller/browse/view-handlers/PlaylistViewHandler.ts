@@ -110,7 +110,7 @@ export default class PlaylistViewHandler extends ExplodableViewHandler<PlaylistV
     const playlist = await this.getModel(ModelType.Playlist).getPlaylist(playlistUrl);
     const playlistRenderer = this.getRenderer(RendererType.Playlist);
     const trackRenderer = this.getRenderer(RendererType.Track);
-    const trackItems = playlist.tracks?.reduce<RenderedListItem[]>((result, track) => {
+    const trackItems = playlist.tracks?.reduce<RenderedListItem[]>((result, track, i) => {
       const parsed = trackRenderer.renderToListItem(track);
       if (parsed) {
         result.push(parsed);
@@ -144,12 +144,6 @@ export default class PlaylistViewHandler extends ExplodableViewHandler<PlaylistV
       const model = this.getModel(ModelType.Playlist);
       const playlistInfo = await model.getPlaylist(playlistUrl);
       const playlistTracks = playlistInfo.tracks;
-      const trackPosition = this.currentView.track;
-
-      if (playlistTracks && trackPosition) {
-        return playlistTracks[parseInt(trackPosition, 10) - 1] || [];
-      }
-
       return playlistTracks || [];
     }
 }

@@ -42,20 +42,40 @@ export default class ArticleRenderer extends BaseRenderer<ArticleEntity> {
   }
 
   renderMediaItemTrack(article: ArticleEntity, mediaItem: ArticleEntityMediaItem<AlbumEntity | TrackEntity>, track: TrackEntity): RenderedListItem {
-    const articleView: ArticleView = {
-      name: 'article',
-      articleUrl: article.url,
-      mediaItemRef: mediaItem.mediaItemRef,
-      track: track.position?.toString()
-    };
-    return {
-      service: 'bandcamp',
-      type: 'song',
+    const common = {
       title: track.name,
       album: mediaItem.name,
       artist: mediaItem.artist ? mediaItem.artist.name : '',
       albumart: mediaItem.thumbnail,
-      duration: track.duration,
+      duration: track.duration
+    };
+    const params = {
+      articleUrl: article.url,
+      mediaItemRef: mediaItem.mediaItemRef,
+      track: track.position?.toString()
+    }
+    const articleView: ArticleView = {
+      name: 'article',
+      ...params,
+      explode: {
+        ...common,
+        uri: ViewHelper.constructUriFromViews([
+          {
+            name: 'root'
+          },
+          {
+            name: 'article',
+            ...params,
+            albumUrl: mediaItem.type === 'album' ? mediaItem.url : mediaItem.album?.url,
+            artistUrl: mediaItem.artist?.url,
+          } satisfies ArticleView]
+        )
+      }
+    };
+    return {
+      service: 'bandcamp',
+      type: 'song',
+      ...common,
       uri: `${this.uri}/${ViewHelper.constructUriSegmentFromView(articleView)}`
     };
   }

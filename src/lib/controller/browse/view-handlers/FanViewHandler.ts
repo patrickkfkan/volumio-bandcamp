@@ -84,7 +84,10 @@ export default class FanViewHandler extends BaseViewHandler<FanView> {
           rendered = tagRenderer.renderGenreListItem(item);
           break;
         case 'track':
-          rendered = trackRenderer.renderToListItem(item, true, true);
+          rendered = trackRenderer.renderToListItem(item, {
+            addType: true,
+            fakeAlbum: true
+          });
           break;
         default:
           rendered = null;

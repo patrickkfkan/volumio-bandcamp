@@ -440,16 +440,35 @@ export default class DiscoverViewHandler extends ExplodableViewHandler<DiscoverV
     const albumUrl = track.album?.url || artistUrl;
 
     if (track.album && albumUrl) {
-      const albumView: AlbumView = {
-        name: 'album',
+      const common: Record<string, string> & { albumUrl: string; } = {
         albumUrl
       };
       if (track.id) {
-        albumView.trackId = String(track.id);
+        common.trackId = String(track.id);
       }
       if (artistUrl) {
-        albumView.artistUrl = artistUrl;
+        common.artistUrl = artistUrl;
       }
+
+      const albumView: AlbumView = {
+        name: 'album',
+        ...common,
+        explode: {
+          title: track.name,
+          artist: track.artist?.name,
+          album: track.album.name,
+          albumart: track.thumbnail,
+          uri: ViewHelper.constructUriFromViews([
+            {
+              name: 'root'
+            },
+            {
+              name: 'album',
+              ...common
+            } satisfies AlbumView
+          ])
+        }
+      };
 
       return `bandcamp/${ViewHelper.constructUriSegmentFromView(albumView)}`;
     }

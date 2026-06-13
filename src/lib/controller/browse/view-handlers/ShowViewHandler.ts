@@ -3,7 +3,7 @@ import type TrackEntity from '../../../entities/TrackEntity';
 import { ModelType } from '../../../model';
 import { type ShowModelGetShowsParams } from '../../../model/ShowModel';
 import UIHelper, { type UILink } from '../../../util/UIHelper';
-import ExplodableViewHandler from './ExplodableViewHandler';
+import ExplodableViewHandler, { UriEmbeddedQueueItem } from './ExplodableViewHandler';
 import type View from './View';
 import { type RenderedList, type RenderedPage } from './ViewHandler';
 import ViewHelper from './ViewHelper';
@@ -143,7 +143,10 @@ export default class ShowViewHandler extends ExplodableViewHandler<ShowView> {
           return true;
         }
         if (item.type === 'track') {
-          const rendered = trackRenderer.renderToListItem(item, true, true);
+          const rendered = trackRenderer.renderToListItem(item, {
+            addType: true,
+            fakeAlbum: true
+          });
           if (rendered) {
             featuredAlbumsList.items.push(rendered);
           }
@@ -276,9 +279,27 @@ export default class ShowViewHandler extends ExplodableViewHandler<ShowView> {
    * bandcamp/show@showUrl={showUrl}
    */
   getTrackUri(track: ShowExplodeTrack) {
+    const common: Record<string, string> & { showUrl: string; } = {
+      showUrl: track.showUrl
+    };
     const showView: ShowView = {
       name: 'show',
-      showUrl: track.showUrl
+      ...common,
+      explode: {
+        title: track.name,
+        artist: track.artist?.name,
+        album: track.album?.name,
+        albumart: track.thumbnail,
+        uri: ViewHelper.constructUriFromViews([
+          {
+            name: 'root'
+          },
+          {
+            name: 'show',
+            ...common
+          } satisfies ShowView
+        ])
+      }
     };
     return `bandcamp/${ViewHelper.constructUriSegmentFromView(showView)}`;
   }

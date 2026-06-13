@@ -11,16 +11,33 @@ export default class ShowRenderer extends BaseRenderer<ShowEntity> {
     if (!data.url) {
       return null;
     }
+
+    const common = {
+      title: data.name,
+      artist: UIHelper.reformatDate(data.date),
+      albumart: data.thumbnail
+    };
+
     const showView: ShowView = {
       name: 'show',
-      showUrl: data.url
+      showUrl: data.url,
+      explode: {
+        ...common,
+        uri: ViewHelper.constructUriFromViews([
+          {
+            name: 'root'
+          },
+          {
+            name: 'show',
+            showUrl: data.url,
+          } satisfies ShowView
+        ]),
+      }
     };
     const result: RenderedListItem = {
       service: 'bandcamp',
       type: 'folder',
-      title: data.name,
-      artist: UIHelper.reformatDate(data.date),
-      albumart: data.thumbnail,
+      ...common,
       uri: `${this.uri}/${ViewHelper.constructUriSegmentFromView(showView)}`
     };
 

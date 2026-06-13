@@ -1,8 +1,9 @@
 import bandcamp from '../../../BandcampContext';
+import TrackEntity from '../../../entities/TrackEntity';
 import { ModelType } from '../../../model';
 import UIHelper, { type UILink } from '../../../util/UIHelper';
 import { type BandView } from './BandViewHandler';
-import ExplodableViewHandler from './ExplodableViewHandler';
+import ExplodableViewHandler, { QueueItem } from './ExplodableViewHandler';
 import type View from './View';
 import { type RenderedList, type RenderedPage, type RenderedPageContents } from './ViewHandler';
 import ViewHelper from './ViewHelper';
@@ -38,7 +39,10 @@ export default class AlbumViewHandler extends ExplodableViewHandler<AlbumView> {
     const albumInfo = await model.getAlbum(albumUrl);
 
     const trackItems = albumInfo.tracks?.reduce<RenderedListItem[]>((result, track) => {
-      const parsed = trackRenderer.renderToListItem({...track, type: 'track'});
+      const parsed = trackRenderer.renderToListItem({
+        ...track,
+        type: 'track'
+      });
       if (parsed) {
         result.push(parsed);
       }
